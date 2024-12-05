@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/background_color">
+
+    <TextView
+        android:id="@+id/splash_welcomeBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Hi Timmy"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="@color/black"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="21dp"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/splash_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Welcome to bookshelf!"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/black"
+        android:layout_marginBottom="74dp"
+        android:alpha="0.33"
+        android:textSize="24sp" />
+
+    <ImageView
+        android:id="@+id/splash_image"
+        android:layout_width="278dp"
+        android:layout_height="271dp"
+        android:src="@drawable/reading_book_1__1_"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Text Below Logo -->
+    <TextView
+        android:id="@+id/splash_hero_quote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start reading"
+        android:textSize="34sp"
+        android:textColor="@color/black"
+        android:alpha="0.33"
+        android:layout_marginTop="52dp"
+        android:layout_marginBottom="13dp"
+        android:fontFamily="@font/poppins_semi_bold"
+        android:gravity="center" />
+
+    <!-- Text Below Logo -->
+    <TextView
+        android:id="@+id/splash_banner_quote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Whatever you want?"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_semi_bold"
+        android:gravity="center" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/black"
+        android:alpha="0.33"
+        android:indeterminateTintMode="src_in"
+        />
+</LinearLayout>

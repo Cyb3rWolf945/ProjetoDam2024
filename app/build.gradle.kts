@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "pt.ipt.dam.bookshelf"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "pt.ipt.dam.bookshelf"
@@ -33,10 +33,17 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    //data binding de forma a evitar findbyid
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
 
+
+    implementation("androidx.core:core-splashscreen:1.0.1")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
