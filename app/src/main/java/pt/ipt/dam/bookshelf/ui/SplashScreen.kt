@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import pt.ipt.dam.bookshelf.MainActivity
 import pt.ipt.dam.bookshelf.databinding.SplashScreenLayoutBinding
+import pt.ipt.dam.bookshelf.ui.auth.authActivity
+import pt.ipt.dam.bookshelf.utils.User
+import pt.ipt.dam.bookshelf.utils.UserCacheUtil
 
 class SplashScreen : AppCompatActivity() {
 
@@ -16,7 +19,7 @@ class SplashScreen : AppCompatActivity() {
 
 
         splashScreen.setKeepOnScreenCondition {
-            false // Set to `true` to keep splash screen active longer
+            false
         }
 
         enableEdgeToEdge()
@@ -25,10 +28,19 @@ class SplashScreen : AppCompatActivity() {
         setContentView(binding.root)
 
 
+
+        // Verificação de utilizador em cache
+        val user: User? = UserCacheUtil.readUserFromCache(this)
+
         binding.root.postDelayed({
-            // You can start your next activity after the splash screen
-            startActivity(Intent(this, MainActivity::class.java)) // Change to your target activity
-            finish() // Close the splash activity to avoid going back to it
-        }, 2000) // 2-second delay for the splash screen, adjust as needed
+            if (user != null) {
+                // Se o utilizador estiver autenticado é redirecionado para a main activity
+                startActivity(Intent(this, MainActivity::class.java))
+            } else {
+                // Se o utilizador não estiver autenticado é redirecionado para a auth activity
+                startActivity(Intent(this, authActivity::class.java))
+            }
+            finish() // Temos de fechar o splash screen para evitar voltar atrás na pilha.
+        }, 2000) // delay de 2 segundos.
     }
 }

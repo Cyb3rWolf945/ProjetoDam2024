@@ -12,23 +12,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp.MySplash"
         tools:targetApi="31">
-
-        <!-- SplashScreen should be the only entry point -->
+        <activity
+            android:name=".ui.auth.authActivity"
+            android:theme="@style/Base.Theme.BookShelf"
+            android:exported="false" />
+        <!-- SplashScreen Terá de ser o ponto de entrada -->
         <activity
             android:name=".ui.SplashScreen"
             android:exported="true"
-            android:theme="@style/Theme.MyApp.MySplash"
-            >
+            android:theme="@style/Theme.MyApp.MySplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
             android:name=".MainActivity"
             android:exported="true" />
-
     </application>
+
 </manifest>
