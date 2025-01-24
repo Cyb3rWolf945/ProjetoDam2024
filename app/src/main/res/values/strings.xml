@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">BookShelf</string>
+    <string name="welcome_to_bookshelf">Bem-vindo ao bookshelf!</string>
+    <string name="welcome_user">Olá Timmy</string>
+    <string name="start_reading">Comece a ler</string>
+    <string name="what_you_want">O que você quiser?</string>
+    <string name="insira_o_nome_de_utilizador">Insira o nome de utilizador</string>
+    <string name="password">Password</string>
+    <string name="enter">Entrar</string>
+    <string name="register_link">Ainda não tens conta? Regista-te?</string>
 </resources>

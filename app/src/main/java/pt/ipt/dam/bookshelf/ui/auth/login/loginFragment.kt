@@ -2,30 +2,51 @@ package pt.ipt.dam.bookshelf.ui.auth.login
 
 import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.commit
+import androidx.fragment.app.Fragment
 import pt.ipt.dam.bookshelf.R
+import pt.ipt.dam.bookshelf.databinding.FragmentLoginBinding
+import pt.ipt.dam.bookshelf.ui.auth.register.registerFragment
 
 class loginFragment : Fragment() {
+
+    // Usar View Binding
+    private var _binding: FragmentLoginBinding? = null
+    private val binding get() = _binding!!
+
+    private val viewModel: LoginViewModel by viewModels()
 
     companion object {
         fun newInstance() = loginFragment()
     }
 
-    private val viewModel: LoginViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // TODO: Use the ViewModel
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.fragment_login, container, false)
+    ): View? {
+        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // clicklistener para transição para o fragment
+        binding.registerLink.setOnClickListener {
+            // Transição para o fragmento de registo
+            parentFragmentManager.commit {
+                setReorderingAllowed(true)
+                replace(R.id.fragment_container, registerFragment.newInstance())
+                addToBackStack(null)
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

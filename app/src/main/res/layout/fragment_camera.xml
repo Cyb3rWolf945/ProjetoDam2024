@@ -6,10 +6,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.components.camera_component.CameraFragment">
 
-    <TextView
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/isbn_input"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Fragment CAMERA"
-        android:textAlignment="center"/>
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:maxLength="13"
+        android:hint="Insira um ISBN"
+        boxBackgroundMode="filled"
+        boxBackgroundColor="#F1EEEA"
+        boxCornerRadiusTopStart="45dp"
+        boxCornerRadiusTopEnd="45dp"
+        boxCornerRadiusBottomStart="45dp"
+        boxCornerRadiusBottomEnd="45dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:background="@drawable/rounded_text_field"
+            android:alpha="0.8" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
 </FrameLayout>
