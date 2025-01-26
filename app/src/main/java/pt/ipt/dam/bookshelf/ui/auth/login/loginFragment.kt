@@ -14,6 +14,7 @@ import pt.ipt.dam.bookshelf.MainActivity
 import pt.ipt.dam.bookshelf.R
 import pt.ipt.dam.bookshelf.databinding.FragmentLoginBinding
 import pt.ipt.dam.bookshelf.ui.auth.register.registerFragment
+import java.util.regex.Pattern
 
 class loginFragment : Fragment() {
 
@@ -52,7 +53,7 @@ class loginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.login.observe(viewLifecycleOwner, Observer { resp ->
-            if (resp == "Success"){
+            if (resp == "Success"){ //fazer alterações aqui relativamente à resposta do endpoint
                 val intent = Intent(requireContext(), MainActivity::class.java)
                 startActivity(intent)
                 activity?.finish()
@@ -70,6 +71,8 @@ class loginFragment : Fragment() {
             }
         }
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

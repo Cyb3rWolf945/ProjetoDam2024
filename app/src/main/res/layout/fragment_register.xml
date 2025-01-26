@@ -15,7 +15,7 @@
         <!-- ScrollView for Input Fields -->
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="280dp"
+            android:layout_height="350dp"
             android:fillViewport="true">
 
             <LinearLayout
@@ -51,6 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/apelido"
+                    android:layout_marginTop="16dp"
                     boxBackgroundColor="#F1EEEA"
                     boxBackgroundMode="filled"
                     boxCornerRadiusBottomEnd="45dp"
@@ -72,6 +73,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/insira_o_nome_de_utilizador"
+                    android:layout_marginTop="16dp"
                     boxBackgroundColor="#F1EEEA"
                     boxBackgroundMode="filled"
                     boxCornerRadiusBottomEnd="45dp"
