@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import pt.ipt.dam.bookshelf.Services.RetrofitClient
 import pt.ipt.dam.bookshelf.databinding.ActivityMainBinding
 import pt.ipt.dam.bookshelf.ui.components.camera_component.CameraFragment
 import pt.ipt.dam.bookshelf.ui.home_component.HomeFragment
@@ -19,6 +20,8 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //val teste = RetrofitClient.getClient().
 
         //Seleção da opção 3 do menu e inserção do fragmento no UI.
         binding.bottomNavigation.selectedItemId = R.id.item_2
