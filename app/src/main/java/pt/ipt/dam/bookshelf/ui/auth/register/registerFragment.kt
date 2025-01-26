@@ -40,7 +40,6 @@ class registerFragment : Fragment() {
             parentFragmentManager.commit {
                 setReorderingAllowed(true)
                 replace(R.id.fragment_container, loginFragment.newInstance())
-                addToBackStack(null)
             }
         }
     }

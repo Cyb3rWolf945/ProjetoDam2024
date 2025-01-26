@@ -8,4 +8,6 @@
     <string name="password">Password</string>
     <string name="enter">Entrar</string>
     <string name="register_link">Ainda não tens conta? Regista-te?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
