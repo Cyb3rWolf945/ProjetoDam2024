@@ -26,10 +26,10 @@
                 android:paddingEnd="16dp">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/username_input"
+                    android:id="@+id/nome_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/insira_o_nome_de_utilizador"
+                    android:hint="@string/nome"
                     boxBackgroundColor="#F1EEEA"
                     boxBackgroundMode="filled"
                     boxCornerRadiusBottomEnd="45dp"
@@ -38,6 +38,28 @@
                     boxCornerRadiusTopStart="45dp">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/text_nome"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.8"
+                        android:background="@drawable/rounded_text_field"
+                        android:fontFamily="@font/poppins_medium" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/apelido_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/apelido"
+                    boxBackgroundColor="#F1EEEA"
+                    boxBackgroundMode="filled"
+                    boxCornerRadiusBottomEnd="45dp"
+                    boxCornerRadiusBottomStart="45dp"
+                    boxCornerRadiusTopEnd="45dp"
+                    boxCornerRadiusTopStart="45dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/text_apelido"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:alpha="0.8"
@@ -49,27 +71,25 @@
                     android:id="@+id/password_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:hint="@string/password"
+                    android:hint="@string/insira_o_nome_de_utilizador"
                     boxBackgroundColor="#F1EEEA"
                     boxBackgroundMode="filled"
                     boxCornerRadiusBottomEnd="45dp"
                     boxCornerRadiusBottomStart="45dp"
                     boxCornerRadiusTopEnd="45dp"
-                    boxCornerRadiusTopStart="45dp"
-                    endIconMode="password_toggle">
+                    boxCornerRadiusTopStart="45dp">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/text_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:alpha="0.8"
-                        android:background="@drawable/rounded_text_field_password"
-                        android:fontFamily="@font/poppins_medium"
-                        android:inputType="textPassword" />
+                        android:background="@drawable/rounded_text_field"
+                        android:fontFamily="@font/poppins_medium" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/teste"
+                    android:id="@+id/password_confirm_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -83,6 +103,7 @@
                     endIconMode="password_toggle">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/password_confirm_test"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:alpha="0.8"
@@ -92,11 +113,11 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/teste5"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:hint="@string/password"
+                    android:hint="@string/confirm_password"
                     boxBackgroundColor="#F1EEEA"
                     boxBackgroundMode="filled"
                     boxCornerRadiusBottomEnd="45dp"
@@ -106,6 +127,7 @@
                     endIconMode="password_toggle">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/confirm_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:alpha="0.8"
@@ -114,28 +136,9 @@
                         android:inputType="textPassword" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/teste6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:hint="@string/password"
-                    boxBackgroundColor="#F1EEEA"
-                    boxBackgroundMode="filled"
-                    boxCornerRadiusBottomEnd="45dp"
-                    boxCornerRadiusBottomStart="45dp"
-                    boxCornerRadiusTopEnd="45dp"
-                    boxCornerRadiusTopStart="45dp"
-                    endIconMode="password_toggle">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:alpha="0.8"
-                        android:background="@drawable/rounded_text_field_password"
-                        android:fontFamily="@font/poppins_medium"
-                        android:inputType="textPassword" />
-                </com.google.android.material.textfield.TextInputLayout>
+
+
             </LinearLayout>
         </ScrollView>
 

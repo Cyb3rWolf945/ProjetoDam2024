@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import pt.ipt.dam.bookshelf.Services.RetrofitClient
 import pt.ipt.dam.bookshelf.databinding.ActivityAuthBinding // Import the binding class
 import pt.ipt.dam.bookshelf.ui.auth.login.loginFragment
 
@@ -19,6 +20,7 @@ class authActivity : AppCompatActivity() {
 
         enableEdgeToEdge()
 
+        val call = RetrofitClient.client
         // Initialize the binding
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root) // Use the root view from the binding

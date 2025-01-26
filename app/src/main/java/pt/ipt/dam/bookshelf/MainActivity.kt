@@ -14,6 +14,7 @@ import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import pt.ipt.dam.bookshelf.Services.RetrofitClient
 import pt.ipt.dam.bookshelf.databinding.ActivityMainBinding
 import pt.ipt.dam.bookshelf.ui.components.camera_component.CameraFragment
 import pt.ipt.dam.bookshelf.ui.home_component.HomeFragment
@@ -31,6 +32,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Seleção da opção 2 do menu e inserção do fragmento no UI.
+        //val teste = RetrofitClient.getClient().
+
+        //Seleção da opção 3 do menu e inserção do fragmento no UI.
         binding.bottomNavigation.selectedItemId = R.id.item_2
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, HomeFragment()) // O 'fragment_container' terá de ser o ID do FrameLayout no layout principal

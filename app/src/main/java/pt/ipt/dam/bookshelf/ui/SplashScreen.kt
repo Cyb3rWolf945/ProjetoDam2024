@@ -8,6 +8,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import pt.ipt.dam.bookshelf.MainActivity
 import pt.ipt.dam.bookshelf.databinding.SplashScreenLayoutBinding
 import pt.ipt.dam.bookshelf.ui.auth.authActivity
+import pt.ipt.dam.bookshelf.ui.auth.login.loginFragment
 import pt.ipt.dam.bookshelf.utils.User
 import pt.ipt.dam.bookshelf.utils.UserCacheUtil
 
@@ -38,7 +39,7 @@ class SplashScreen : AppCompatActivity() {
                 startActivity(Intent(this, MainActivity::class.java))
             } else {
                 // Se o utilizador não estiver autenticado é redirecionado para a auth activity
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, authActivity::class.java))
             }
             finish() // Temos de fechar o splash screen para evitar voltar atrás na pilha.
         }, 2000) // delay de 2 segundos.
