@@ -4,11 +4,13 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.animation.TranslateAnimation
+import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.TextView
 import android.widget.Toast
@@ -19,10 +21,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import coil.load
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
+import com.squareup.picasso.Picasso
 import pt.ipt.dam.bookshelf.databinding.ActivityMainBinding
 import pt.ipt.dam.bookshelf.models.VolumeInfo
 import pt.ipt.dam.bookshelf.ui.home_component.HomeFragment
@@ -220,15 +224,41 @@ class MainActivity : AppCompatActivity() {
 
 
     //Dialogs -- Para adição de livros
-
     private fun showSuccessDialog(bookInfo: VolumeInfo) {
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_book_info, null)
+
+        val coverImageView = dialogView.findViewById<ImageView>(R.id.coverImageView)
+        val ratingTextView = dialogView.findViewById<TextView>(R.id.ratingTextView)
+        val pagesTextView = dialogView.findViewById<TextView>(R.id.pagesTextView)
+        val dimensionsTextView = dialogView.findViewById<TextView>(R.id.dimensionsTextView)
+
+
+        val imageUrl = bookInfo.imageLinks?.thumbnail?.replace("http:", "https:")
+        coverImageView.load(imageUrl) {
+            crossfade(true)
+            error(R.drawable.ic_launcher_background)
+        }
+
+        // Set text values using API data
+        ratingTextView.text = bookInfo.averageRating?.let { String.format("%.1f", it) } ?: "N/A"
+        pagesTextView.text = bookInfo.pageCount?.toString() ?: "N/A"
+        dimensionsTextView.text = "A4"
+
         MaterialAlertDialogBuilder(this)
             .setTitle(bookInfo.title)
-            .setMessage("Author(s): ${bookInfo.authors?.joinToString(", ")}\n" +
-                    "Description: ${bookInfo.description}\n" +
-                    "Published: ${bookInfo.publishedDate}")
-            .setPositiveButton("OK", null)
+            .setView(dialogView)
+            .setPositiveButton("Adicionar") { dialog, _ ->
+                // Handle adding the book to your collection
+                addBookToCollection(bookInfo)
+            }
+            .setNegativeButton("Cancelar") { dialog, _ ->
+                dialog.dismiss()
+            }
             .show()
+    }
+
+    private fun addBookToCollection(bookInfo: VolumeInfo) {
+        // Implement your logic to save the book
     }
 
     private fun showErrorDialog(message: String) {

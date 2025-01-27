@@ -1,11 +1,8 @@
 package pt.ipt.dam.bookshelf.ui.auth.login
 
-import android.util.Log
-import androidx.appcompat.view.ActionMode.Callback
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import okhttp3.internal.Util
 import pt.ipt.dam.bookshelf.Services.RetrofitClient
 import pt.ipt.dam.bookshelf.Services.Service
 import pt.ipt.dam.bookshelf.models.Utilizadores

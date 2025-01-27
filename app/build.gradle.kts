@@ -44,6 +44,8 @@ dependencies {
     implementation(libs.androidx.camera.lifecycle)
     implementation(libs.androidx.camera.view)
     implementation(libs.androidx.camera.camera2)
+    implementation("io.coil-kt:coil:2.7.0")
+    implementation("com.squareup.picasso:picasso:2.8")
     implementation ("com.google.android.gms:play-services-code-scanner:16.1.0")
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation(libs.androidx.core.ktx)
