@@ -3,11 +3,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.search_books">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="40dp"
+                android:padding="16dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/search_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:hint="Pesquisar por titulo ou ISBN"
+                    app:boxBackgroundColor="#F1EEEA"
+                    app:boxBackgroundMode="filled"
+                    app:boxCornerRadiusBottomEnd="45dp"
+                    app:boxCornerRadiusBottomStart="45dp"
+                    app:boxCornerRadiusTopEnd="45dp"
+                    app:boxCornerRadiusTopStart="45dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/search_input_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.8"
+                        android:background="@drawable/rounded_text_field"
+                        android:fontFamily="@font/poppins_medium"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/search_button"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:padding="8dp"
+                    android:backgroundTint="#F58C73"
+                    style="?attr/materialIconButtonFilledTonalStyle"
+                    app:icon="@drawable/vector"
+                    app:iconTint="@android:color/white"
+                    app:iconGravity="textTop"
+                    app:iconPadding="4dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/search_books_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    >
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </LinearLayout>
+    </LinearLayout>
 
 </FrameLayout>

@@ -12,7 +12,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_vertical"
-        android:layout_marginTop="120dp">
+        android:layout_marginTop="80dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="24dp"
+            android:src="@drawable/base_logo"
+            >
+        </ImageView>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/username_input"
@@ -71,7 +79,7 @@
             android:fontFamily="@font/poppins_semi_bold"
             android:textColor="#000000"
             android:layout_gravity="center"
-            android:text="@string/enter"
+            android:text="@string/enter_login"
             android:textSize="16sp" />
 
         <TextView
