@@ -4,24 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
-    android:background="?android:attr/windowBackground">
+    android:background="@color/background_color">
 
     <TextView
         android:id="@+id/option1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Option 1"
+        android:text="Digitalizar ISBN do livros."
+        android:fontFamily="@font/poppins_medium"
         android:padding="10dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:textSize="18sp" />
+        android:layout_marginBottom="6dp"
+        android:textSize="12sp"
+        android:background="@drawable/options_shape_menu"/>
 
     <TextView
         android:id="@+id/option2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Option 2"
+        android:text="Procurar novos livros."
+        android:fontFamily="@font/poppins_medium"
+        android:layout_marginBottom="6dp"
         android:padding="10dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:textSize="18sp" />
+        android:textSize="12sp"
+        android:background="@drawable/options_shape_menu"/>
 
 </LinearLayout>

@@ -39,7 +39,7 @@ class SplashScreen : AppCompatActivity() {
                 startActivity(Intent(this, MainActivity::class.java))
             } else {
                 // Se o utilizador não estiver autenticado é redirecionado para a auth activity
-                startActivity(Intent(this, authActivity::class.java))
+                startActivity(Intent(this, MainActivity ::class.java))
             }
             finish() // Temos de fechar o splash screen para evitar voltar atrás na pilha.
         }, 2000) // delay de 2 segundos.

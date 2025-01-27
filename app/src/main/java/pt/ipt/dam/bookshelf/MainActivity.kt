@@ -1,11 +1,13 @@
 package pt.ipt.dam.bookshelf
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
 import android.widget.PopupWindow
 import android.widget.TextView
@@ -13,16 +15,21 @@ import android.widget.Toast
 import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import pt.ipt.dam.bookshelf.Services.RetrofitClient
+import com.google.mlkit.vision.barcode.common.Barcode
+import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
+import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 import pt.ipt.dam.bookshelf.databinding.ActivityMainBinding
 import pt.ipt.dam.bookshelf.ui.components.camera_component.CameraFragment
 import pt.ipt.dam.bookshelf.ui.home_component.HomeFragment
 import pt.ipt.dam.bookshelf.ui.user_profile_component.user_profile
+import java.util.concurrent.ExecutorService
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var cameraExecutor: ExecutorService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -115,7 +122,7 @@ class MainActivity : AppCompatActivity() {
 
         // Definir ações para os itens de menu
         option1.setOnClickListener {
-            Toast.makeText(this, "Option 1 selected", Toast.LENGTH_SHORT).show()
+            checkCameraPermission()
             // Feche o PopupWindow
             popupWindow.dismiss()
         }
@@ -125,5 +132,60 @@ class MainActivity : AppCompatActivity() {
             // Feche o PopupWindow
             popupWindow.dismiss()
         }
+    }
+
+
+    //CAMARA FUNCTIONS
+
+    private fun checkCameraPermission() {
+        if (ContextCompat.checkSelfPermission(
+                this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            startCamera()
+        } else {
+            requestPermissions(arrayOf(Manifest.permission.CAMERA), 1001)
+        }
+    }
+
+
+    @SuppressLint("MissingSuperCall")
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == 1001 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            startCamera()
+        } else {
+            // Handle permission denied
+            Toast.makeText(this, "Permissão de câmera negada", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+    private fun startCamera() {
+        // Initialize barcodeScanner within the method, no global variable needed
+        val options = GmsBarcodeScannerOptions.Builder()
+            .setBarcodeFormats(
+                Barcode.FORMAT_EAN_13,  // ISBN em formato EAN-13
+                Barcode.FORMAT_UPC_A)  // ISBN em formato UPC-A
+            .enableAutoZoom()
+            .build()
+
+        val barcodeScanner = GmsBarcodeScanning.getClient(this, options)
+
+        // Start barcode scanning
+        barcodeScanner.startScan()
+            .addOnSuccessListener { barcode ->
+                // Task completed successfully
+                val rawValue = barcode.rawValue // Retrieve the raw value of the barcode
+                // Do something with the rawValue (like displaying or processing)
+                Toast.makeText(this, "Barcode detected: $rawValue", Toast.LENGTH_SHORT).show()
+
+            }
+            .addOnCanceledListener {
+                // Task canceled
+                println("Scan was canceled")
+            }
+            .addOnFailureListener { e ->
+                // Task failed with an exception
+                e.printStackTrace()
+                println("Scan failed: ${e.message}")
+            }
     }
 }
