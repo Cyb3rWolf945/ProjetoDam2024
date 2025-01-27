@@ -1,5 +1,6 @@
 package pt.ipt.dam.bookshelf.ui.auth.register
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,13 +18,13 @@ class RegisterViewModel : ViewModel() {
 
     private val api = RetrofitClient.client.create(Service::class.java)
 
-    fun register(email: String, nome: String, apelido: String, password: String) {
+    fun register(nome: String, apelido: String, email:String, password: String) {
         val request = Utilizadores(
-            email = email,
             nome = nome,
             apelido = apelido,
+            email = email,
             password = password,
-            userid = 0
+            userid = 0 //aqui não interessa muito o que se passa porque tem autoincrement na tabela Utilizadores
         )
 
         api.register(request).enqueue(object : Callback<String> {

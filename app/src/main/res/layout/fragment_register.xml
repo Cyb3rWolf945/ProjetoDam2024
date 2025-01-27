@@ -15,7 +15,7 @@
         <!-- ScrollView for Input Fields -->
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="280dp"
+            android:layout_height="350dp"
             android:fillViewport="true">
 
             <LinearLayout
@@ -51,6 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/apelido"
+                    android:layout_marginTop="16dp"
                     boxBackgroundColor="#F1EEEA"
                     boxBackgroundMode="filled"
                     boxCornerRadiusBottomEnd="45dp"
@@ -68,10 +69,11 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/password_input"
+                    android:id="@+id/email_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/insira_o_nome_de_utilizador"
+                    android:layout_marginTop="16dp"
                     boxBackgroundColor="#F1EEEA"
                     boxBackgroundMode="filled"
                     boxCornerRadiusBottomEnd="45dp"
@@ -80,16 +82,17 @@
                     boxCornerRadiusTopStart="45dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/text_password"
+                        android:id="@+id/text_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:alpha="0.8"
                         android:background="@drawable/rounded_text_field"
                         android:fontFamily="@font/poppins_medium" />
+
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/password_confirm_input"
+                    android:id="@+id/password_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -103,7 +106,7 @@
                     endIconMode="password_toggle">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/password_confirm_test"
+                        android:id="@+id/password_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:alpha="0.8"
@@ -113,7 +116,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-
+                    android:id="@+id/confirm_password_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -127,7 +130,7 @@
                     endIconMode="password_toggle">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/confirm_password"
+                        android:id="@+id/confirm_password_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:alpha="0.8"
@@ -135,8 +138,6 @@
                         android:fontFamily="@font/poppins_medium"
                         android:inputType="textPassword" />
                 </com.google.android.material.textfield.TextInputLayout>
-
-
 
 
             </LinearLayout>

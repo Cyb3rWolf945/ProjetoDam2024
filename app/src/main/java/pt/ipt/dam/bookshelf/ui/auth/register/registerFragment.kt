@@ -3,6 +3,7 @@ package pt.ipt.dam.bookshelf.ui.auth.register
 import android.content.Intent
 import androidx.fragment.app.viewModels
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import pt.ipt.dam.bookshelf.MainActivity
 import pt.ipt.dam.bookshelf.R
 import pt.ipt.dam.bookshelf.databinding.FragmentRegisterBinding
 import pt.ipt.dam.bookshelf.ui.auth.login.loginFragment
+import java.util.regex.Pattern
 
 class registerFragment : Fragment() {
 
@@ -31,6 +33,7 @@ class registerFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -38,26 +41,50 @@ class registerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //tratar a resposta da do endpoint na API (só tem uma resposta, as restantes verificações estão do lado do Android)
         viewModel.value.observe(viewLifecycleOwner, Observer { resp ->
             if(resp == "Email já está a ser utilizado"){
                 Toast.makeText(requireContext(), "Email já está a ser utilizado", Toast.LENGTH_SHORT).show()
-            } else if(binding.textPassword.text != binding.passwordConfirmTest.text){
-                Toast.makeText(requireContext(), "As passwords não coincidem", Toast.LENGTH_SHORT).show()
-            } else {
-                val intent = Intent(requireContext(), loginFragment::class.java)
-                startActivity(intent)
-                activity?.finish()
             }
         })
+
+        binding.loginButton.setOnClickListener{
+            //verificar se o conteúdo nos campos das passwords é diferente
+            if((binding.passwordText.text.toString() != binding.confirmPasswordText.text.toString())){
+                Toast.makeText(requireContext(), "As passwords não coincidem", Toast.LENGTH_SHORT).show()
+                //verificar se o regex está correto nos campos do email ou da password
+            } else if (!isValidEmail(binding.textEmail.text.toString()) || !isValidPassword(binding.passwordText.text.toString()) ){
+                Toast.makeText(requireContext(), "Verifique se a sua password ou email cumpre os requisitos necessários", Toast.LENGTH_SHORT).show()
+            } else {
+                //se chegou aqui, é porque passou nas verificações
+                viewModel.register(binding.textNome.text.toString(), binding.textApelido.text.toString(), binding.textEmail.text.toString(), binding.passwordText.text.toString())
+                //mudar para o fragmento loginFragment()
+                val selectedFragment = loginFragment()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, selectedFragment)
+                    .commit()
+            }
+
+        }
 
         // clicklistener para transição para o fragment
         binding.loginLink.setOnClickListener {
             // Transição para o fragmento de Login
+
             parentFragmentManager.commit {
                 setReorderingAllowed(true)
                 replace(R.id.fragment_container, loginFragment.newInstance())
             }
         }
+    }
+
+    //estas funções sao dedicadas ao regex do email e da password
+    fun isValidEmail(email: String) : Boolean {
+        return Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\$").matcher(email).matches()
+    }
+
+    fun isValidPassword(password: String): Boolean {
+        return Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{8,}\$").matcher(password).matches()
     }
 
     override fun onDestroyView() {
