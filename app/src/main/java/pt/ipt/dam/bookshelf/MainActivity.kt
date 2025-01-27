@@ -17,11 +17,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 import pt.ipt.dam.bookshelf.databinding.ActivityMainBinding
-import pt.ipt.dam.bookshelf.ui.components.camera_component.CameraFragment
+import pt.ipt.dam.bookshelf.models.VolumeInfo
 import pt.ipt.dam.bookshelf.ui.home_component.HomeFragment
 import pt.ipt.dam.bookshelf.ui.user_profile_component.user_profile
 import java.util.concurrent.ExecutorService
@@ -30,6 +33,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var cameraExecutor: ExecutorService
+
+    // ViewModel responsavel pelo dialog de adição do livro
+    private lateinit var viewModel: BookInfoViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +53,28 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragment_container, HomeFragment()) // O 'fragment_container' terá de ser o ID do FrameLayout no layout principal
             .commit()
 
+
+        // Initialize ViewModel
+        viewModel = ViewModelProvider(this).get(BookInfoViewModel::class.java)
+
+        // Observe LiveData
+        viewModel.bookInfoState.observe(this, Observer { state ->
+            when (state) {
+                is BookInfoState.Loading -> {
+                    // Show loading dialog or progress
+                    //showLoadingDialog()
+                }
+                is BookInfoState.Success -> {
+                    // Update the dialog with book information
+                    showSuccessDialog(state.bookInfo)
+                }
+                is BookInfoState.Error -> {
+                    // Show error message
+                    showErrorDialog(state.message)
+                }
+            }
+        })
+
         binding.apply {
             clickListeners()
         }
@@ -56,10 +84,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.item_1 -> {
-                    val selectedFragment = CameraFragment()
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, selectedFragment)
-                        .commit()
+
                 }
                 R.id.item_2 -> {
                     val selectedFragment = HomeFragment()
@@ -78,10 +103,7 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                 }
                 R.id.item_5 -> {
-                    val selectedFragment = CameraFragment()
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, selectedFragment)
-                        .commit()
+
                 }
             }
             return@setOnItemSelectedListener true
@@ -175,6 +197,10 @@ class MainActivity : AppCompatActivity() {
                 // Task completed successfully
                 val rawValue = barcode.rawValue // Retrieve the raw value of the barcode
                 // Do something with the rawValue (like displaying or processing)
+                if (rawValue != null) {
+                    viewModel.fetchBookInfo(rawValue, "AIzaSyBJaKQAJgsSeHOOdY0uZVhufLBDZN-Ps7I")
+                }
+                binding.bottomNavigation.selectedItemId = R.id.item_2 // para mudar de sitio
                 Toast.makeText(this, "Barcode detected: $rawValue", Toast.LENGTH_SHORT).show()
 
             }
@@ -187,5 +213,29 @@ class MainActivity : AppCompatActivity() {
                 e.printStackTrace()
                 println("Scan failed: ${e.message}")
             }
+    }
+
+
+
+
+
+    //Dialogs -- Para adição de livros
+
+    private fun showSuccessDialog(bookInfo: VolumeInfo) {
+        MaterialAlertDialogBuilder(this)
+            .setTitle(bookInfo.title)
+            .setMessage("Author(s): ${bookInfo.authors?.joinToString(", ")}\n" +
+                    "Description: ${bookInfo.description}\n" +
+                    "Published: ${bookInfo.publishedDate}")
+            .setPositiveButton("OK", null)
+            .show()
+    }
+
+    private fun showErrorDialog(message: String) {
+        MaterialAlertDialogBuilder(this)
+            .setIcon(R.drawable.book_not_found)
+            .setMessage(message)
+            .setNegativeButton("Cancel", null)
+            .show()
     }
 }
