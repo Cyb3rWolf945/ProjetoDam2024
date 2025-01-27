@@ -29,6 +29,7 @@ import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 import com.squareup.picasso.Picasso
 import pt.ipt.dam.bookshelf.databinding.ActivityMainBinding
 import pt.ipt.dam.bookshelf.models.VolumeInfo
+import pt.ipt.dam.bookshelf.searchBooks.search_books
 import pt.ipt.dam.bookshelf.ui.home_component.HomeFragment
 import pt.ipt.dam.bookshelf.ui.user_profile_component.user_profile
 import java.util.concurrent.ExecutorService
@@ -154,8 +155,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         option2.setOnClickListener {
-            Toast.makeText(this, "Option 2 selected", Toast.LENGTH_SHORT).show()
-            // Feche o PopupWindow
+            val selectedFragment = search_books()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, selectedFragment)
+                .commit()
             popupWindow.dismiss()
         }
     }

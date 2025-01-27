@@ -9,7 +9,8 @@
     <string name="apelido">Apelido</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirmar Password</string>
-    <string name="enter">Regista-te</string>
+    <string name="enter_registo">Regista-te</string>
+    <string name="enter_login">Login</string>
     <string name="register_link">Ainda não tens conta? Regista-te?</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
