@@ -15,10 +15,16 @@ data class VolumeInfo(
     val publishedDate: String?,
     val imageLinks: ImageLinks?,
     val pageCount: Int?,
-    val averageRating: Double?
+    val averageRating: Double?,
+    val industryIdentifiers: List<IndustryIdentifier>?
 )
 
 data class ImageLinks(
     val smallThumbnail: String?,
     val thumbnail: String?
+)
+
+data class IndustryIdentifier(
+    val type: String?,
+    val identifier: String?
 )

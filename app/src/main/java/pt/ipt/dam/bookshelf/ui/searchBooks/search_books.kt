@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import pt.ipt.dam.bookshelf.R
 import pt.ipt.dam.bookshelf.databinding.FragmentSearchBooksBinding
+import pt.ipt.dam.bookshelf.ui.book_details.BookDetailsFragment
 import pt.ipt.dam.bookshelf.ui.searchBooks.SearchBooksViewModel
 
 class search_books : Fragment() {
@@ -33,7 +35,20 @@ class search_books : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Set up RecyclerView with BooksAdapter
-        val adapter = BooksAdapter(emptyList())
+        val adapter = BooksAdapter(emptyList()) { isbn ->
+            // Pass the ISBN to the book details fragment
+            val bundle = Bundle().apply {
+                putString("ISBN", isbn)
+            }
+            val bookDetailsFragment = BookDetailsFragment().apply {
+                arguments = bundle
+            }
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, bookDetailsFragment)
+                .addToBackStack(null)
+                .commit()
+        }
+
         binding.searchBooksRecycler.adapter = adapter
         binding.searchBooksRecycler.layoutManager = LinearLayoutManager(context)
 
@@ -56,3 +71,4 @@ class search_books : Fragment() {
         _binding = null
     }
 }
+
