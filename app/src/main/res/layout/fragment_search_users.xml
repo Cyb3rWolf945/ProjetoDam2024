@@ -12,36 +12,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- RadioGroup para selecionar o tipo de pesquisa -->
-        <RadioGroup
-            android:id="@+id/searchOptionGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginBottom="16dp"> <!-- espaço entre o RadioGroup e o campo de pesquisa -->
-
-            <RadioButton
-                android:id="@+id/searchByEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Pesquisar por Email"
-                android:textSize="16sp"
-                android:fontFamily="@font/poppins_medium"
-                android:textColor="@android:color/black"
-                android:checked="true"/> <!-- email é o tipo padrão -->
-
-            <RadioButton
-                android:id="@+id/searchByName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Pesquisar por Nome e Apelido"
-                android:textSize="16sp"
-                android:fontFamily="@font/poppins_medium"
-                android:textColor="@android:color/black" />
-        </RadioGroup>
-
-        <!-- Barra de pesquisa -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -72,7 +42,7 @@
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Botão de pesquisa -->
+
             <Button
                 android:id="@+id/search_button"
                 android:layout_width="56dp"

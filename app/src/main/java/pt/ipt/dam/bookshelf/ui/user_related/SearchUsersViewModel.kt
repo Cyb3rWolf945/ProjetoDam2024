@@ -12,27 +12,39 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SearchUsersViewModel : ViewModel() {
-    private val _users = MutableLiveData<String>()
-    val users: LiveData<String> get() = _users
+    private val _users = MutableLiveData<Utilizadores>() // Altere para uma lista de Utilizadores
+    val users: LiveData<Utilizadores> get() = _users
 
     private val api = RetrofitClient.client.create(Service::class.java)
 
     fun searchUsers(email: String) {
         val call = api.getUsers(email)
 
-        call.enqueue(object : Callback<String> {
-            override fun onResponse(call: Call<String>, response: Response<String>) {
+        call.enqueue(object : Callback<Utilizadores> { // Alteração para usar a lista de Utilizadores
+            override fun onResponse(call: Call<Utilizadores>, response: Response<Utilizadores>) {
                 if (response.isSuccessful) {
                     Log.v("testeresponse", response.body().toString())
-                    _users.value = response.body()
+                    _users.value = response.body() // Atribui a lista de utilizadores
                 } else {
-                    _users.value = ""
+                    _users.value = Utilizadores(
+                        userid = 0,
+                        nome = "",
+                        apelido = "",
+                        email = "",
+                        password = ""
+                    )
                 }
             }
 
-            override fun onFailure(call: Call<String>, t: Throwable) {
+            override fun onFailure(call: Call<Utilizadores>, t: Throwable) {
                 Log.v("testeresponse", "erro", t)
-                _users.value = ""
+                _users.value = Utilizadores(
+                    userid = 0,
+                    nome = "",
+                    apelido = "",
+                    email = "",
+                    password = ""
+                )
             }
         })
     }

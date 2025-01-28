@@ -16,6 +16,6 @@ interface Service {
     fun register(@Body utilizador: Utilizadores): Call<String>
 
     @GET("/users/")
-    fun getUsers(@Query ("email") email: String):Call<String>
+    fun getUsers(@Query ("email") email: String):Call<Utilizadores>
 
 }

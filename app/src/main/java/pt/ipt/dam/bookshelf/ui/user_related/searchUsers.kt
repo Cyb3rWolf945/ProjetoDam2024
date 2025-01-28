@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import pt.ipt.dam.bookshelf.R
+import pt.ipt.dam.bookshelf.models.Utilizadores
 
 class searchUsers : Fragment() {
 
@@ -28,7 +29,14 @@ class searchUsers : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        usersAdapter = SearchUsersAdapter(emptyList())
+        // Inicializa o adaptador com um usuário padrão (caso não haja resposta)
+        usersAdapter = SearchUsersAdapter(Utilizadores(
+            userid = 0,
+            nome = "",
+            apelido = "",
+            email = "",
+            password = ""
+        ))
     }
 
     override fun onCreateView(
@@ -48,15 +56,13 @@ class searchUsers : Fragment() {
             val email = searchInputText.text.toString()
 
             if (email.isNotEmpty()) {
-                viewModel.searchUsers(email)
+                viewModel.searchUsers(email) // Inicia a busca pelo usuário
             }
         }
 
-        viewModel.users.observe(viewLifecycleOwner, Observer { userEmail ->
-            if (userEmail != "Não foram encontrados utilizadores"){
-                usersAdapter.updateUsers(listOf(userEmail))
-            }
-
+        // Observar a lista de utilizadores e atualizar o RecyclerView
+        viewModel.users.observe(viewLifecycleOwner, Observer { user ->
+            usersAdapter.updateUser(user) // Atualiza o usuário no adaptador
         })
 
         return rootView
