@@ -12,34 +12,28 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SearchUsersViewModel : ViewModel() {
-
-    private val _value = MutableLiveData<String>()
-    val value: LiveData<String> get() = _value
+    private val _users = MutableLiveData<String>()
+    val users: LiveData<String> get() = _users
 
     private val api = RetrofitClient.client.create(Service::class.java)
 
-    fun getUsers(email:String){
+    fun searchUsers(email: String) {
+        val call = api.getUsers(email)
 
-        api.getUsers(email).enqueue(object : Callback<String> {
-            override fun onResponse(
-                call: Call<String>,
-                response: Response<String>,
-            ) {
-                if (response.isSuccessful){
-                    Log.v("success", "deu certo")
-                    _value.value = response.body()
+        call.enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if (response.isSuccessful) {
+                    Log.v("testeresponse", response.body().toString())
+                    _users.value = response.body()
                 } else {
-                    Log.v("not so good", "deu certo")
-                    _value.value = ""
+                    _users.value = ""
                 }
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.e("not so good", "deu certo", t)
-                _value.value = "não"
+                Log.v("testeresponse", "erro", t)
+                _users.value = ""
             }
-
-
         })
     }
 }

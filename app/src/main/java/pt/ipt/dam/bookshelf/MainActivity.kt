@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity() {
                     showPopupMenu(menuItem)
                 }
                 R.id.item_4 -> {
-                    val selectedFragment = user_profile()
+                    val selectedFragment = searchUsers()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, selectedFragment)
                         .commit()
