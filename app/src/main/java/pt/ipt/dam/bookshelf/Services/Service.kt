@@ -1,6 +1,7 @@
 package pt.ipt.dam.bookshelf.Services
 import pt.ipt.dam.bookshelf.models.Livros
 import pt.ipt.dam.bookshelf.models.Utilizadores
+import pt.ipt.dam.bookshelf.models.VolumeInfo
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -13,5 +14,8 @@ interface Service {
 
     @POST("/users/")
     fun register(@Body utilizador: Utilizadores): Call<String>
+
+    @POST("/livros/")
+    fun addBook(@Body livro: Livros): Call<Void>
 
 }

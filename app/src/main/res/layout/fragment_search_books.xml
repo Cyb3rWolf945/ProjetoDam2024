@@ -26,7 +26,7 @@
                     android:layout_marginEnd="8dp"
                     android:hint="Pesquisar por titulo ou ISBN"
                     app:boxBackgroundColor="#F1EEEA"
-                    app:boxBackgroundMode="filled"
+                    app:boxBackgroundMode="none"
                     app:boxCornerRadiusBottomEnd="45dp"
                     app:boxCornerRadiusBottomStart="45dp"
                     app:boxCornerRadiusTopEnd="45dp"
