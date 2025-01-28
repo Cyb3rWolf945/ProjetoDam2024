@@ -4,6 +4,7 @@ import pt.ipt.dam.bookshelf.models.Utilizadores
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
+import retrofit2.http.GET
 import retrofit2.http.Query
 
 
@@ -13,5 +14,8 @@ interface Service {
 
     @POST("/users/")
     fun register(@Body utilizador: Utilizadores): Call<String>
+
+    @GET("/users/")
+    fun getUsers(@Query ("email") email: String):Call<String>
 
 }

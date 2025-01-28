@@ -32,6 +32,7 @@ import pt.ipt.dam.bookshelf.models.VolumeInfo
 import pt.ipt.dam.bookshelf.searchBooks.search_books
 import pt.ipt.dam.bookshelf.ui.home_component.HomeFragment
 import pt.ipt.dam.bookshelf.ui.user_profile_component.user_profile
+import pt.ipt.dam.bookshelf.ui.user_related.searchUsers
 import java.util.concurrent.ExecutorService
 
 class MainActivity : AppCompatActivity() {
@@ -89,7 +90,10 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.item_1 -> {
-
+                    val selectedFragment = searchUsers()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, selectedFragment)
+                        .commit()
                 }
                 R.id.item_2 -> {
                     val selectedFragment = HomeFragment()
