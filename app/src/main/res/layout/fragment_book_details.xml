@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- Progress Bar -->
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
@@ -12,7 +12,7 @@
         android:layout_gravity="center"
         android:visibility="gone" />
 
-    <!-- Book Details Layout -->
+
     <ScrollView
         android:id="@+id/bookDetailsLayout"
         android:layout_width="match_parent"
@@ -25,57 +25,136 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <ImageView
-                android:id="@+id/coverImageView"
-                android:layout_width="200dp"
-                android:layout_height="300dp"
-                android:layout_gravity="center_horizontal"
-                android:scaleType="centerCrop"
-                android:contentDescription="Book Cover" />
 
             <TextView
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
                 android:id="@+id/titleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Title"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:lineHeight="32dp"
+                android:textColor="@color/black"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                android:layout_marginBottom="16dp" />
+
+
+            <ImageView
+                android:id="@+id/coverImageView"
+                android:layout_width="187dp"
+                android:layout_height="203dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="centerCrop"
+                android:layout_marginBottom="16dp" />
 
             <TextView
                 android:id="@+id/authorsTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Authors"
+                android:fontFamily="@font/poppins_medium"
                 android:textSize="16sp"
-                android:layout_marginTop="8dp" />
+                android:gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="16dp"
+                android:weightSum="3">
+
+                <!-- Published Date Section -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:paddingHorizontal="8dp">
+
+                    <TextView
+                        android:id="@+id/publishedDateTextView_Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pub Date"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:id="@+id/publishedDateTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Published Date"
+                        android:textSize="14sp"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <!-- Page Count Section -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:paddingHorizontal="8dp">
+
+                    <TextView
+                        android:id="@+id/pagesTextView_Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Page Count"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:id="@+id/pagesTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Page Count"
+                        android:textSize="14sp"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <!-- Average Rating Section -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:paddingHorizontal="8dp">
+
+                    <TextView
+                        android:id="@+id/averageRatingTextView_Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Average Rating"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:id="@+id/averageRatingTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Average Rating"
+                        android:textSize="14sp"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/descriptionTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Description"
-                android:layout_marginTop="8dp" />
-
-            <TextView
-                android:id="@+id/publishedDateTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Published Date"
-                android:layout_marginTop="8dp" />
-
-            <TextView
-                android:id="@+id/pagesTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Page Count"
-                android:layout_marginTop="8dp" />
-
-            <TextView
-                android:id="@+id/averageRatingTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Average Rating"
+                android:textSize="16sp"
                 android:layout_marginTop="8dp" />
         </LinearLayout>
     </ScrollView>
