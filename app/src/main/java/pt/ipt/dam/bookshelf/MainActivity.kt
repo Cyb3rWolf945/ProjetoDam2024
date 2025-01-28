@@ -39,6 +39,7 @@ import pt.ipt.dam.bookshelf.ui.user_profile_component.user_profile
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import pt.ipt.dam.bookshelf.ui.user_related.searchUsers
 import java.util.concurrent.ExecutorService
 
 class MainActivity : AppCompatActivity() {
@@ -98,6 +99,7 @@ class MainActivity : AppCompatActivity() {
             when (menuItem.itemId) {
                 R.id.item_1 -> {
                     val selectedFragment = Collections()
+                    val selectedFragment = searchUsers()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, selectedFragment)
                         .commit()
@@ -113,7 +115,7 @@ class MainActivity : AppCompatActivity() {
                     showPopupMenu(menuItem)
                 }
                 R.id.item_4 -> {
-                    val selectedFragment = user_profile()
+                    val selectedFragment = searchUsers()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, selectedFragment)
                         .commit()
