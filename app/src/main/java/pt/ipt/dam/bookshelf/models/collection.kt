@@ -5,3 +5,7 @@ data class collection(
     val nome: String,
     val isPublic: Boolean
 )
+
+data class CollectionsResponse(
+    val colecoes: List<collection>
+)

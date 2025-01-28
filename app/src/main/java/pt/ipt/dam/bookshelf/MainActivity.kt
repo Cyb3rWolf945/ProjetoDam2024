@@ -26,14 +26,13 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
-import com.squareup.picasso.Picasso
 import pt.ipt.dam.bookshelf.Services.RetrofitClient
 import pt.ipt.dam.bookshelf.Services.Service
 import pt.ipt.dam.bookshelf.databinding.ActivityMainBinding
 import pt.ipt.dam.bookshelf.models.Livros
 import pt.ipt.dam.bookshelf.models.VolumeInfo
 import pt.ipt.dam.bookshelf.searchBooks.search_books
-import pt.ipt.dam.bookshelf.ui.books.collections.collections
+import pt.ipt.dam.bookshelf.ui.books.collections.Collections
 import pt.ipt.dam.bookshelf.ui.home_component.HomeFragment
 import pt.ipt.dam.bookshelf.ui.settings.Settings
 import pt.ipt.dam.bookshelf.ui.user_profile_component.user_profile
@@ -97,7 +96,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.item_1 -> {
-                    val selectedFragment = collections()
+                    val selectedFragment = Collections()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, selectedFragment)
                         .commit()

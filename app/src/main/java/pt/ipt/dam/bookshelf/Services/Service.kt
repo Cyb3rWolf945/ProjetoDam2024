@@ -1,4 +1,5 @@
 package pt.ipt.dam.bookshelf.Services
+import pt.ipt.dam.bookshelf.models.CollectionsResponse
 import pt.ipt.dam.bookshelf.models.Livros
 import pt.ipt.dam.bookshelf.models.Utilizadores
 import pt.ipt.dam.bookshelf.models.VolumeInfo
@@ -20,6 +21,6 @@ interface Service {
     @POST("/livros/")
     fun addBook(@Body livro: Livros): Call<Void>
 
-    @GET("/colecoes/")
-    fun getCollections(@Query("userid") userid: Int): Call<List<collection>>
+    @GET("colecoes")
+    fun getCollections(@Query("userid") userid: Int): Call<CollectionsResponse>
 }
