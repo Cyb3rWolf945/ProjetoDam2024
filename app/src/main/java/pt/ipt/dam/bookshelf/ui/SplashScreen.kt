@@ -33,6 +33,12 @@ class SplashScreen : AppCompatActivity() {
         // Verificação de utilizador em cache
         val user: User? = UserCacheUtil.readUserFromCache(this)
 
+        if (user != null){
+            binding.splashWelcomeBack.text = "Olá ${user.username}"
+        }else{
+            binding.splashWelcomeBack.text = ""
+        }
+
         binding.root.postDelayed({
             if (user != null) {
                 // Se o utilizador estiver autenticado é redirecionado para a main activity

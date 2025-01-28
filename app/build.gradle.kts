@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-}
+    alias(libs.plugins.secrets.gradle.plugin)}
 
 android {
     namespace = "pt.ipt.dam.bookshelf"
@@ -33,6 +33,8 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+
 
     buildFeatures {
         viewBinding = true

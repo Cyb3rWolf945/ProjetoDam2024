@@ -1,15 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.book_details.BookDetailsFragment">
+    android:padding="16dp">
 
-    <TextView
-        android:id="@+id/bookISBN"
+    <!-- Progress Bar -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <!-- Book Details Layout -->
+    <ScrollView
+        android:id="@+id/bookDetailsLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
-        android:text="BOOK DETAILS" />
+        android:visibility="gone">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/coverImageView"
+                android:layout_width="200dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="centerCrop"
+                android:contentDescription="Book Cover" />
+
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Title"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/authorsTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Authors"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/descriptionTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/publishedDateTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Published Date"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/pagesTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Page Count"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/averageRatingTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Average Rating"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+    </ScrollView>
 </FrameLayout>

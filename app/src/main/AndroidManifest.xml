@@ -39,10 +39,16 @@
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode_ui" />
 
+        <meta-data
+            android:name="com.google.books.API_KEY"
+            android:value="${BOOKS_API_KEY}" />
+
         <activity
             android:name=".ui.auth.authActivity"
             android:theme="@style/Base.Theme.BookShelf"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"
+            android:hardwareAccelerated="false"/>
 
         <!-- SplashScreen Terá de ser o ponto de entrada -->
         <activity
@@ -57,7 +63,9 @@
 
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan"
+            android:hardwareAccelerated="false"/>
     </application>
 
 </manifest>
