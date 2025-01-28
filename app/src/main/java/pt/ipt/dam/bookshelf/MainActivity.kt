@@ -89,6 +89,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.apply {
             clickListeners()
+            clickListenersTopBar()
         }
     }
 
@@ -126,6 +127,15 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             return@setOnItemSelectedListener true
+        }
+    }
+
+    private fun clickListenersTopBar(){
+        binding.topAppBar.avatar.setOnClickListener{
+            val selectedFragment = Settings()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, selectedFragment)
+                .commit()
         }
     }
 

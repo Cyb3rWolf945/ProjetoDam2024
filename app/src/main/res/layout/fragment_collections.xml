@@ -3,14 +3,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.books.searchBooks.collections.Collections"
     android:padding="20dp">
 
-   <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/collections_recycler"
+   <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:padding="12dp">
-   </androidx.recyclerview.widget.RecyclerView>
+       android:orientation="vertical"
+       android:layout_marginTop="20dp">
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_marginBottom="24dp">
+
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Coleções de"
+             android:textSize="16sp"
+             android:fontFamily="@font/poppins_medium"
+             android:textColor="#000000" />
+
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text=" user"
+             android:textSize="16sp"
+             android:fontFamily="@font/poppins_medium"
+             android:textColor="#000000" />
+
+      </LinearLayout>
+
+      <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/collections_recycler"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          android:padding="12dp" />
+
+      <!-- Add the Button below the RecyclerView -->
+      <com.google.android.material.button.MaterialButton
+          android:id="@+id/login_button"
+          android:layout_width="match_parent"
+          android:layout_height="51dp"
+          android:layout_marginTop="24dp"
+          app:cornerRadius="16dp"
+          android:backgroundTint="#FDB870"
+          android:textAlignment="center"
+          android:fontFamily="@font/poppins_semi_bold"
+          android:textColor="#000000"
+          android:layout_gravity="center"
+          android:text="Adicionar coleção"
+          android:textSize="16sp" />
+
+   </LinearLayout>
+
 
 </FrameLayout>
