@@ -1,4 +1,4 @@
-package pt.ipt.dam.bookshelf.ui.book_details
+package pt.ipt.dam.bookshelf.ui.books.searchBooks.book_details
 
 import androidx.fragment.app.viewModels
 import android.os.Bundle

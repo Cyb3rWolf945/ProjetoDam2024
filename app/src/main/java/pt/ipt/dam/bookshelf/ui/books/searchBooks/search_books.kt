@@ -9,8 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import pt.ipt.dam.bookshelf.R
 import pt.ipt.dam.bookshelf.databinding.FragmentSearchBooksBinding
-import pt.ipt.dam.bookshelf.ui.book_details.BookDetailsFragment
-import pt.ipt.dam.bookshelf.ui.searchBooks.SearchBooksViewModel
+import pt.ipt.dam.bookshelf.ui.books.searchBooks.book_details.BookDetailsFragment
+import pt.ipt.dam.bookshelf.ui.books.searchBooks.SearchBooksViewModel
 
 class search_books : Fragment() {
 

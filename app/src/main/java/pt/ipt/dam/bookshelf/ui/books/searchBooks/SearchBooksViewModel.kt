@@ -1,4 +1,4 @@
-package pt.ipt.dam.bookshelf.ui.searchBooks
+package pt.ipt.dam.bookshelf.ui.books.searchBooks
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
