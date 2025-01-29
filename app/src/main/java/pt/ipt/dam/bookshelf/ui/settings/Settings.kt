@@ -18,6 +18,8 @@ import android.widget.Toast
 import pt.ipt.dam.bookshelf.R
 import pt.ipt.dam.bookshelf.ui.auth.authActivity
 import pt.ipt.dam.bookshelf.ui.auth.login.loginFragment
+import pt.ipt.dam.bookshelf.utils.ToastUtils
+import java.util.regex.Pattern
 
 class Settings : Fragment() {
 
@@ -33,7 +35,7 @@ class Settings : Fragment() {
     ): View {
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
 
-        // Localiza os elementos do layout
+
         val editProfile = view.findViewById<View>(R.id.edit_profile)
         val about = view.findViewById<View>(R.id.about)
         val deleteAccount = view.findViewById<View>(R.id.count_remove)
@@ -52,11 +54,11 @@ class Settings : Fragment() {
             startActivity(intent)
         }
 
-        // Configura os cliques nos elementos
+
         editProfile.setOnClickListener {
             showPopupEditProfile(
                 "Editar Perfil",
-                "Aqui você pode editar seu perfil, alterar a foto e as informações pessoais."
+                ""
             )
         }
 
@@ -67,15 +69,15 @@ class Settings : Fragment() {
             )
         }
 
-        // Adiciona o clique para deletar a conta
+
         deleteAccount.setOnClickListener {
             showPopupDeleteUser(
                 "Deletar Conta",
-                "Você realmente deseja excluir sua conta? Essa ação não pode ser revertida."
+                "Tem a certeza que quer apagar a sua conta?"
             )
         }
 
-        // Observa o resultado da atualização do usuário
+
         viewModel.updateSuccess.observe(viewLifecycleOwner, { success ->
             if (success) {
                 Toast.makeText(context, "Dados atualizados com sucesso!", Toast.LENGTH_SHORT).show()
@@ -94,8 +96,9 @@ class Settings : Fragment() {
         val editName = dialogView.findViewById<EditText>(R.id.editTextNome)
         val editEmail = dialogView.findViewById<EditText>(R.id.editTextEmail)
         val editPassword = dialogView.findViewById<EditText>(R.id.editTextPassword)
+        val editApelido = dialogView.findViewById<EditText>(R.id.editTextApelido)
 
-        // Obtém o userId das SharedPreferences
+
         val preferences = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         val userId = preferences.getInt("userid", -1)
 
@@ -106,10 +109,16 @@ class Settings : Fragment() {
                 val name = editName.text.toString()
                 val email = editEmail.text.toString()
                 val password = editPassword.text.toString()
+                val apelido = editApelido.text.toString()
 
                 if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
-                    // Atualiza o usuário
-                    viewModel.updateUser(name, email, password)
+                    if (isValidPassword(password) && isValidEmail(email)){
+                        viewModel.updateUser(name, email, password, apelido)
+                    } else {
+                        ToastUtils.showCustomToast(requireContext(), "Todos os campos devem ser preenchidos corretamente")
+                        //Toast.makeText(requireContext(), "Todos os campos devem ser preenchidos corretamente!", Toast.LENGTH_SHORT).show()
+                    }
+
                 } else {
                     Toast.makeText(
                         context,
@@ -149,7 +158,7 @@ class Settings : Fragment() {
 
         val userId = preferences.getInt("userid", -1)
         if (userId == -1) {
-            Toast.makeText(context, "Usuário não encontrado.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Utilizador não encontrado.", Toast.LENGTH_SHORT).show()
             return
         }
         val dialogView = LayoutInflater.from(context).inflate(R.layout.delete_account, null)
@@ -164,6 +173,8 @@ class Settings : Fragment() {
             viewModel.deleteUser(userId)
             dialog.dismiss()
 
+            ToastUtils.showCustomToast(requireContext(), "Conta apagada com sucesso!")
+
             val selectedFragment = loginFragment()
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, selectedFragment)
@@ -176,5 +187,14 @@ class Settings : Fragment() {
         }
 
         dialog.show()
+    }
+
+    //estas funções sao dedicadas ao regex do email e da password
+    fun isValidEmail(email: String) : Boolean {
+        return Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\$").matcher(email).matches()
+    }
+
+    fun isValidPassword(password: String): Boolean {
+        return Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{8,}\$").matcher(password).matches()
     }
 }

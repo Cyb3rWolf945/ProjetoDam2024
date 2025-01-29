@@ -28,7 +28,7 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
         return sharedPreferences.getInt("userid", -1)
     }
 
-    fun updateUser(newName: String, newEmail: String, newPassword: String) {
+    fun updateUser(newName: String, newEmail: String, newPassword: String, apelido: String) {
         val userid = getUserId()
         if (userid == -1) {
             _updateSuccess.value = false
@@ -40,7 +40,7 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
             email = newEmail,
             password = newPassword,
             nome = newName,
-            apelido = ""
+            apelido = apelido
         )
 
         api.updateUser(request).enqueue(object : Callback<Void> {

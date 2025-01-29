@@ -12,7 +12,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SearchUsersViewModel : ViewModel() {
-    private val _users = MutableLiveData<Utilizadores>() // Altere para uma lista de Utilizadores
+    private val _users = MutableLiveData<Utilizadores>()
     val users: LiveData<Utilizadores> get() = _users
 
     private val api = RetrofitClient.client.create(Service::class.java)
@@ -20,11 +20,11 @@ class SearchUsersViewModel : ViewModel() {
     fun searchUsers(email: String) {
         val call = api.getUsers(email)
 
-        call.enqueue(object : Callback<Utilizadores> { // Alteração para usar a lista de Utilizadores
+        call.enqueue(object : Callback<Utilizadores> {
             override fun onResponse(call: Call<Utilizadores>, response: Response<Utilizadores>) {
                 if (response.isSuccessful) {
                     Log.v("testeresponse", response.body().toString())
-                    _users.value = response.body() // Atribui a lista de utilizadores
+                    _users.value = response.body()
                 } else {
                     _users.value = Utilizadores(
                         userid = 0,
