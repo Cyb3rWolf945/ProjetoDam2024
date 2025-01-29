@@ -38,4 +38,16 @@ interface Service {
 
     fun getUsers(@Query ("email") email: String):Call<Utilizadores>
 
+    @GET("/users/{user_id}/collections/{collection_id}/books")
+    fun getBooksForCollection(
+        @Path("user_id") userId: Int,
+        @Path("collection_id") collectionId: Int
+    ): Call<List<Livros>>
+
+    @POST("users/{userId}/livros")
+    fun addBook(
+        @Path("userId") userId: Int,
+        @Body livro: Livros
+    ): Call<Void>
+
 }

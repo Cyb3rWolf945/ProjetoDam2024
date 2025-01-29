@@ -10,9 +10,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import pt.ipt.dam.bookshelf.R
 import pt.ipt.dam.bookshelf.databinding.FragmentCollectionsBinding
-import pt.ipt.dam.bookshelf.databinding.FragmentSearchBooksBinding
-import pt.ipt.dam.bookshelf.searchBooks.BooksAdapter
-import pt.ipt.dam.bookshelf.ui.books.searchBooks.book_details.BookDetailsFragment
+import pt.ipt.dam.bookshelf.ui.books.collectionDetails.CollectionDetailsFragment
 
 class Collections : Fragment() {
 
@@ -20,6 +18,8 @@ class Collections : Fragment() {
     private var _binding: FragmentCollectionsBinding? = null
     private val binding get() = _binding!!
     private lateinit var collectionsAdapter: CollectionsAdapter
+    private var userId: Int = -1
+    private var userName: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,19 +49,34 @@ class Collections : Fragment() {
         }
     }
 
+    private fun setupObservers() {
+        viewModel.books.observe(viewLifecycleOwner) { collections ->
+            collectionsAdapter.updateCollections(collections)
+        }
+    }
+
+
     private fun setupRecyclerView() {
-        collectionsAdapter = CollectionsAdapter()
+        collectionsAdapter = CollectionsAdapter { collectionId ->
+            openCollectionDetails(collectionId)
+        }
         binding.collectionsRecycler.apply {
             adapter = collectionsAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
     }
 
-    private fun setupObservers() {
-        viewModel.books.observe(viewLifecycleOwner) { collections ->
-            Log.d("Collections", "Updating adapter with ${collections.size} collections")
-            collectionsAdapter.updateCollections(collections)
+    private fun openCollectionDetails(collectionId: Int) {
+        val fragment = CollectionDetailsFragment().apply {
+            arguments = Bundle().apply {
+                putInt("idcolecoes", collectionId)
+                putInt("userId", userId)
+            }
         }
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onDestroyView() {

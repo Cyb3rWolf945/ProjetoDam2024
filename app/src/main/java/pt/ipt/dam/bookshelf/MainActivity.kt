@@ -322,12 +322,18 @@ class MainActivity : AppCompatActivity() {
             editora = 1,
             descricao = bookInfo.description ?: "",
             rating = (bookInfo.averageRating?.toFloat() ?: 0f),
-            ISBN = isbn ?: "",
+            ISBN = isbn,
             paginas = bookInfo.pageCount ?: 0
         )
 
-        // Call the API
-        val call = bookApi.addBook(livro)
+        // Check if userId is valid
+        if (userId == -1) {
+            Log.e("AddBook", "Invalid user ID")
+            return
+        }
+
+        // Call the API with userId
+        val call = bookApi.addBook(userId, livro)
         call.enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
