@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,28 +18,14 @@ import pt.ipt.dam.bookshelf.models.Utilizadores
 
 class searchUsers : Fragment() {
 
-    companion object {
-        fun newInstance() = searchUsers()
-    }
-
     private val viewModel: SearchUsersViewModel by viewModels()
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var usersAdapter: SearchUsersAdapter
+
     private lateinit var searchButton: Button
     private lateinit var searchInputText: EditText
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // Inicializa o adaptador com um usuário padrão (caso não haja resposta)
-        usersAdapter = SearchUsersAdapter(Utilizadores(
-            userid = 0,
-            nome = "",
-            apelido = "",
-            email = "",
-            password = ""
-        ))
-    }
+    private lateinit var userInfoLayout: LinearLayout
+    private lateinit var nomeApelidoText: TextView
+    private lateinit var emailText: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,24 +33,31 @@ class searchUsers : Fragment() {
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_search_users, container, false)
 
-        recyclerView = rootView.findViewById(R.id.users_recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = usersAdapter
-
         searchInputText = rootView.findViewById(R.id.search_input_text)
         searchButton = rootView.findViewById(R.id.search_button)
 
+        userInfoLayout = rootView.findViewById(R.id.user_info_layout)
+        nomeApelidoText = rootView.findViewById(R.id.NomeApelidoText)
+        emailText = rootView.findViewById(R.id.EmailText)
+
+
+        userInfoLayout.visibility = View.GONE
+
         searchButton.setOnClickListener {
             val email = searchInputText.text.toString()
-
             if (email.isNotEmpty()) {
-                viewModel.searchUsers(email) // Inicia a busca pelo usuário
+                viewModel.searchUsers(email)
             }
         }
 
-        // Observar a lista de utilizadores e atualizar o RecyclerView
         viewModel.users.observe(viewLifecycleOwner, Observer { user ->
-            usersAdapter.updateUser(user) // Atualiza o usuário no adaptador
+            if (user.email != "") {
+                nomeApelidoText.text = "${user.nome} ${user.apelido}"
+                emailText.text = user.email
+                userInfoLayout.visibility = View.VISIBLE
+            } else {
+                userInfoLayout.visibility = View.GONE
+            }
         })
 
         return rootView

@@ -24,7 +24,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     private val api = RetrofitClient.client.create(Service::class.java)
 
     init {
-        UserPreferences.init(application)  // Inicializa apenas uma vez
+        UserPreferences.init(application)
     }
 
     fun login(email: String, password: String) {
@@ -43,7 +43,6 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                     if (resp != null) {
                         _login.value = resp
 
-                        // Guardar na cache sem precisar de Context na função
                         UserPreferences.saveUser(resp.userid, resp.nome)
                     }
                     Log.v("teste", response.body().toString())

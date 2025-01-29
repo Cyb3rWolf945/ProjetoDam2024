@@ -56,15 +56,44 @@
                 app:iconPadding="4dp" />
         </LinearLayout>
 
-        <!-- RecyclerView para exibir os resultados -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/users_recycler_view"
+
+
+        <LinearLayout
+            android:id="@+id/user_info_layout"
+            android:visibility="gone"
+            android:layout_marginTop="40sp"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="16dp"
-            android:padding="8dp" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="@drawable/rounded_background_cards"
+            >
+
+            <TextView
+                android:id="@+id/NomeApelidoText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome e Apelido"
+                android:textSize="18sp"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="#000000"/>
+
+            <TextView
+                android:id="@+id/EmailText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="#666666"
+                android:layout_marginTop="4dp"/>
+
+        </LinearLayout>
 
     </LinearLayout>
+
+
+
+
 
 </FrameLayout>
