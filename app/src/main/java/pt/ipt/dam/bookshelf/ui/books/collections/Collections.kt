@@ -36,8 +36,17 @@ class Collections : Fragment() {
         setupRecyclerView()
         setupObservers()
 
+        val userId = arguments?.getInt("userId", -1)
+        val userName = arguments?.getString("userName", "user")
+
         // Fetch collections
-        viewModel.fetchCollections(1)
+        if (userId != null) {
+            viewModel.fetchCollections(userId)
+        }
+
+        if(userName != null){
+            binding.usernameText.text = " " + userName
+        }
     }
 
     private fun setupRecyclerView() {

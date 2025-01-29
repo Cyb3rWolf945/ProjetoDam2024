@@ -53,8 +53,9 @@ class loginFragment : Fragment() {
 
         viewModel.login.observe(viewLifecycleOwner, Observer { loginResponse ->
             if (loginResponse != null && loginResponse.userid != 0 && loginResponse.nome.isNotEmpty()) {
-
                 val intent = Intent(requireContext(), MainActivity::class.java)
+                intent.putExtra("userId", loginResponse.userid)
+                intent.putExtra("userName", loginResponse.nome)
                 startActivity(intent)
                 activity?.finish()
             } else {

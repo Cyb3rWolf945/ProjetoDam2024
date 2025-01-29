@@ -46,6 +46,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var cameraExecutor: ExecutorService
+    private var userId: Int = -1
+    private var userName: String? = null
 
     // ViewModel responsavel pelo dialog de adição do livro
     private lateinit var viewModel: BookInfoViewModel
@@ -54,6 +56,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         enableEdgeToEdge()
+
+        userId = intent.getIntExtra("userId", -1)
+        userName = intent.getStringExtra("userName")
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -61,9 +67,16 @@ class MainActivity : AppCompatActivity() {
         //val teste = RetrofitClient.getClient().
 
         //Seleção da opção 3 do menu e inserção do fragmento no UI.
-        binding.bottomNavigation.selectedItemId = R.id.item_2
+        binding.bottomNavigation.selectedItemId = R.id.item_1
+        val selectedFragment = Collections()
+
+        val bundle = Bundle()
+        bundle.putInt("userId", userId)
+        bundle.putString("userName", userName)
+        selectedFragment.arguments = bundle
+
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, HomeFragment()) // O 'fragment_container' terá de ser o ID do FrameLayout no layout principal
+            .replace(R.id.fragment_container, selectedFragment)
             .commit()
 
 
@@ -101,6 +114,12 @@ class MainActivity : AppCompatActivity() {
             when (menuItem.itemId) {
                 R.id.item_1 -> {
                     val selectedFragment = Collections()
+
+                    val bundle = Bundle()
+                    bundle.putInt("userId", userId)
+                    bundle.putString("userName", userName)
+                    selectedFragment.arguments = bundle
+
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, selectedFragment)
                         .commit()

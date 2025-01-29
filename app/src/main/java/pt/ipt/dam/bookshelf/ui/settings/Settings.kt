@@ -1,5 +1,6 @@
 package pt.ipt.dam.bookshelf.ui.settings
 
+import UserPreferences.clearUser
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -15,6 +16,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import pt.ipt.dam.bookshelf.R
+import pt.ipt.dam.bookshelf.ui.auth.authActivity
 import pt.ipt.dam.bookshelf.ui.auth.login.loginFragment
 
 class Settings : Fragment() {
@@ -36,7 +38,13 @@ class Settings : Fragment() {
         val about = view.findViewById<View>(R.id.about)
         val deleteAccount = view.findViewById<View>(R.id.count_remove)
         val privacy = view.findViewById<View>(R.id.privacy)
+        val session = view.findViewById<View>(R.id.close_session)
 
+        session.setOnClickListener{
+            clearUser()
+            val intent = Intent(requireContext(), authActivity::class.java)
+            startActivity(intent)
+        }
 
         privacy.setOnClickListener {
             val url = "https://staticdam.onrender.com/"

@@ -141,6 +141,39 @@
             app:dividerColor="@color/buttonsColor"
             app:dividerThickness="2dp"/>
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/close_session"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="12dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Terminar sessão"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:textSize="18sp"
+                android:layout_marginEnd="16dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/seta_direita"
+                app:tint="@color/buttonsColor" />
+
+        </LinearLayout>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dividerColor="@color/buttonsColor"
+            app:dividerThickness="2dp"/>
+
     </LinearLayout>
 
 </FrameLayout>

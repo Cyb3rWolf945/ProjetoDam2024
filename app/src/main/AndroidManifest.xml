@@ -47,7 +47,7 @@
             android:theme="@style/Base.Theme.BookShelf"
             android:exported="false"
             android:windowSoftInputMode="adjustPan"
-            android:hardwareAccelerated="false"/>
+            android:hardwareAccelerated="true"/>
 
         <!-- SplashScreen Terá de ser o ponto de entrada -->
         <activity

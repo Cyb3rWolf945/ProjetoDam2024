@@ -44,10 +44,15 @@ class SplashScreen : AppCompatActivity() {
         binding.root.postDelayed({
             if (user != null) {
                 // Se o utilizador estiver autenticado, vai para a MainActivity
-                startActivity(Intent(this, MainActivity::class.java))
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    putExtra("userId", user.first)
+                    putExtra("userName", user.second)
+                }
+                startActivity(intent)
+
             } else {
                 // Se não estiver autenticado, vai para a AuthActivity
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, authActivity::class.java))
             }
             finish()
         }, 2000)
