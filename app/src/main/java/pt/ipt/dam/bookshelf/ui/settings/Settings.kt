@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.core.content.res.ResourcesCompat
 import pt.ipt.dam.bookshelf.R
 import pt.ipt.dam.bookshelf.ui.auth.login.loginFragment
+import pt.ipt.dam.bookshelf.utils.ToastUtils
 import java.util.regex.Pattern
 
 class Settings : Fragment() {
@@ -100,7 +101,8 @@ class Settings : Fragment() {
                     if (isValidPassword(password) && isValidEmail(email)){
                         viewModel.updateUser(name, email, password, apelido)
                     } else {
-                        Toast.makeText(requireContext(), "Todos os campos devem ser preenchidos corretamente!", Toast.LENGTH_SHORT).show()
+                        ToastUtils.showCustomToast(requireContext(), "Todos os campos devem ser preenchidos corretamente")
+                        //Toast.makeText(requireContext(), "Todos os campos devem ser preenchidos corretamente!", Toast.LENGTH_SHORT).show()
                     }
 
                 } else {
