@@ -2,8 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp">
-
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -11,7 +11,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:visibility="gone" />
-
 
     <ScrollView
         android:id="@+id/bookDetailsLayout"
@@ -25,7 +24,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-
             <TextView
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center"
@@ -38,7 +36,6 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:layout_marginBottom="16dp" />
-
 
             <ImageView
                 android:id="@+id/coverImageView"
@@ -156,6 +153,46 @@
                 android:text="Description"
                 android:textSize="16sp"
                 android:layout_marginTop="8dp" />
+
+            <!-- Buttons inside same LinearLayout to fix the issue -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="24dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/add_button"
+                    android:layout_width="0dp"
+                    android:layout_height="51dp"
+                    android:layout_weight="1"
+                    app:cornerRadius="16dp"
+                    android:backgroundTint="#FDB870"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:textColor="#000000"
+                    android:layout_gravity="center"
+                    android:text="Adicionar coleção"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="8dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/back_button"
+                    android:layout_width="0dp"
+                    android:layout_height="51dp"
+                    android:layout_weight="1"
+                    app:cornerRadius="16dp"
+                    android:backgroundTint="#FDB870"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:textColor="#000000"
+                    android:layout_gravity="center"
+                    android:text="Voltar"
+                    android:textSize="16sp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
         </LinearLayout>
+
     </ScrollView>
 </FrameLayout>

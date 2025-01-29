@@ -47,7 +47,7 @@ class SplashScreen : AppCompatActivity() {
                 startActivity(Intent(this, MainActivity::class.java))
             } else {
                 // Se não estiver autenticado, vai para a AuthActivity
-                startActivity(Intent(this, authActivity::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
             }
             finish()
         }, 2000)

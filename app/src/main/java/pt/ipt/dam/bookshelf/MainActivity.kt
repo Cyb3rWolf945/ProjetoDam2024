@@ -67,6 +67,8 @@ class MainActivity : AppCompatActivity() {
             .commit()
 
 
+        binding.bottomNavigation.menu.findItem(R.id.item_2)?.isVisible = false
+
         // Initialize ViewModel
         viewModel = ViewModelProvider(this).get(BookInfoViewModel::class.java)
 

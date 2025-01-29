@@ -2,9 +2,10 @@ package pt.ipt.dam.bookshelf.ui.settings
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.fragment.app.viewModels
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,9 +14,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.core.content.res.ResourcesCompat
 import pt.ipt.dam.bookshelf.R
 import pt.ipt.dam.bookshelf.ui.auth.login.loginFragment
 
@@ -37,6 +35,14 @@ class Settings : Fragment() {
         val editProfile = view.findViewById<View>(R.id.edit_profile)
         val about = view.findViewById<View>(R.id.about)
         val deleteAccount = view.findViewById<View>(R.id.count_remove)
+        val privacy = view.findViewById<View>(R.id.privacy)
+
+
+        privacy.setOnClickListener {
+            val url = "https://staticdam.onrender.com/"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        }
 
         // Configura os cliques nos elementos
         editProfile.setOnClickListener {

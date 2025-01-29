@@ -8,6 +8,7 @@
     <item
         android:id="@+id/item_2"
         android:enabled="true"
+        android:visibility="gone"
         android:icon="@drawable/ic_menu_home"
         android:title="" />
     <item

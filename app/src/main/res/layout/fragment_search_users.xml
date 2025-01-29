@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginTop="40dp"
             android:gravity="center_vertical">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -26,7 +27,7 @@
                 android:layout_marginEnd="8dp"
                 android:hint="@string/procurar_utilizadores"
                 app:boxBackgroundColor="#F1EEEA"
-                app:boxBackgroundMode="filled"
+                app:boxBackgroundMode="none"
                 app:boxCornerRadiusBottomEnd="45dp"
                 app:boxCornerRadiusBottomStart="45dp"
                 app:boxCornerRadiusTopEnd="45dp"
