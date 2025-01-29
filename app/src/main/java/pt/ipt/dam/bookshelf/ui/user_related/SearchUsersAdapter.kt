@@ -12,7 +12,6 @@ import pt.ipt.dam.bookshelf.R
 import pt.ipt.dam.bookshelf.models.BookItem
 import pt.ipt.dam.bookshelf.models.Utilizadores
 import pt.ipt.dam.bookshelf.searchBooks.BooksAdapter
-import pt.ipt.dam.bookshelf.ui.book_details.BookDetailsFragment
 
 class SearchUsersAdapter(private var user: Utilizadores) : RecyclerView.Adapter<SearchUsersAdapter.UserViewHolder>() {
 
