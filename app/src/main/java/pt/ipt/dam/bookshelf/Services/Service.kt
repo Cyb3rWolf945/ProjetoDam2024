@@ -11,6 +11,7 @@ import retrofit2.http.DELETE
 import retrofit2.http.POST
 import retrofit2.http.GET
 import retrofit2.http.PUT
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 
@@ -22,7 +23,7 @@ interface Service {
     fun updateUser(@Body user: Utilizadores): Call<Void>
 
     @DELETE("/users/delete")
-    fun deleteUser(@Body user: Utilizadores): Call<Void>
+    fun deleteUser(@Query("userid") userid: Int): Call<Void>
 
 
     @POST("/users/")

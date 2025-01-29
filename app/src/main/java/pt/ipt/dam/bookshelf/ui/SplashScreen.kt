@@ -28,9 +28,8 @@ class SplashScreen : AppCompatActivity() {
         binding = SplashScreenLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-       //sharedpreferences
-        UserPreferences.init(this)
 
+        UserPreferences.init(this)
 
         val user = UserPreferences.getUser()
 

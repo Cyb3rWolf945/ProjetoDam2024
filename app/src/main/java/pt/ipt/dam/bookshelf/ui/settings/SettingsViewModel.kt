@@ -46,14 +46,38 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
         api.updateUser(request).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 _updateSuccess.value = response.isSuccessful
-                UserPreferences.saveUser(userid, newName)
                 Log.v("teste", "deu certo " + response.body().toString())
-
             }
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
                 _updateSuccess.value = false
                 Log.v("teste", "deu errado", t)
+            }
+        })
+    }
+
+    fun deleteUser(userId: Int) {
+        if (userId == -1) {
+            _updateSuccess.value = false
+            return
+        }
+
+        api.deleteUser(userId).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    Log.v("teste", "deu certo")
+                    sharedPreferences.edit().remove("userid").apply()
+
+                    _updateSuccess.value = true
+                } else {
+                    Log.v("teste", "errado")
+                    _updateSuccess.value = false
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                _updateSuccess.value = false
+                Log.v("teste", "erro", t)
             }
         })
     }

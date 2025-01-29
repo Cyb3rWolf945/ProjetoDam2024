@@ -4,10 +4,12 @@ import android.app.AlertDialog
 import android.content.Context
 import androidx.fragment.app.viewModels
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -15,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.core.content.res.ResourcesCompat
 import pt.ipt.dam.bookshelf.R
+import pt.ipt.dam.bookshelf.ui.auth.login.loginFragment
 
 class Settings : Fragment() {
 
@@ -33,14 +36,29 @@ class Settings : Fragment() {
         // Localiza os elementos do layout
         val editProfile = view.findViewById<View>(R.id.edit_profile)
         val about = view.findViewById<View>(R.id.about)
+        val deleteAccount = view.findViewById<View>(R.id.count_remove)
 
         // Configura os cliques nos elementos
         editProfile.setOnClickListener {
-            showPopupEditProfile("Editar Perfil", "Aqui você pode editar seu perfil, alterar a foto e as informações pessoais.")
+            showPopupEditProfile(
+                "Editar Perfil",
+                "Aqui você pode editar seu perfil, alterar a foto e as informações pessoais."
+            )
         }
 
         about.setOnClickListener {
-            showPopupSobre("Sobre Nós", "Curso: Engenharia Informática\nAutoria: António Gonçalves 23787\nAfonso Costa 24855\nBibliotecas")
+            showPopupSobre(
+                "Sobre Nós",
+                "Curso: Engenharia Informática\nAutoria: António Gonçalves 23787\nAfonso Costa 24855\nBibliotecas"
+            )
+        }
+
+        // Adiciona o clique para deletar a conta
+        deleteAccount.setOnClickListener {
+            showPopupDeleteUser(
+                "Deletar Conta",
+                "Você realmente deseja excluir sua conta? Essa ação não pode ser revertida."
+            )
         }
 
         // Observa o resultado da atualização do usuário
@@ -79,7 +97,11 @@ class Settings : Fragment() {
                     // Atualiza o usuário
                     viewModel.updateUser(name, email, password)
                 } else {
-                    Toast.makeText(context, "Todos os campos devem ser preenchidos!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        "Todos os campos devem ser preenchidos!",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
             .setNegativeButton("Cancelar", null)
@@ -102,6 +124,43 @@ class Settings : Fragment() {
         }
 
         dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_sobre)
+        dialog.show()
+    }
+
+    private fun showPopupDeleteUser(title: String, message: String) {
+        val context = requireContext()
+
+
+        val preferences = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+
+        val userId = preferences.getInt("userid", -1)
+        if (userId == -1) {
+            Toast.makeText(context, "Usuário não encontrado.", Toast.LENGTH_SHORT).show()
+            return
+        }
+        val dialogView = LayoutInflater.from(context).inflate(R.layout.delete_account, null)
+        val buttonDelete = dialogView.findViewById<Button>(R.id.buttonDelete)
+        val buttonCancel = dialogView.findViewById<Button>(R.id.buttonCancel)
+
+        val dialog = AlertDialog.Builder(context)
+            .setTitle(title)
+            .setView(dialogView)
+            .create()
+        buttonDelete.setOnClickListener {
+            viewModel.deleteUser(userId)
+            dialog.dismiss()
+
+            val selectedFragment = loginFragment()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, selectedFragment)
+                .commit()
+        }
+
+
+        buttonCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+
         dialog.show()
     }
 }
