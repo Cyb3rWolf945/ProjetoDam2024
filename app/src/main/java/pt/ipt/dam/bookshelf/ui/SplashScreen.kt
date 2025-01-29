@@ -15,9 +15,9 @@ import pt.ipt.dam.bookshelf.utils.UserCacheUtil
 class SplashScreen : AppCompatActivity() {
 
     private lateinit var binding: SplashScreenLayoutBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
-
 
         splashScreen.setKeepOnScreenCondition {
             false
@@ -28,26 +28,29 @@ class SplashScreen : AppCompatActivity() {
         binding = SplashScreenLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+       //sharedpreferences
+        UserPreferences.init(this)
 
 
-        // Verificação de utilizador em cache
-        val user: User? = UserCacheUtil.readUserFromCache(this)
+        val user = UserPreferences.getUser()
 
-        if (user != null){
-            binding.splashWelcomeBack.text = "Olá ${user.username}"
-        }else{
+        if (user != null) {
+            // existe o first e o secod porque é um par de valores: Pair<Int, String>?
+            binding.splashWelcomeBack.text = "Olá ${user.second}"
+        } else {
             binding.splashWelcomeBack.text = ""
         }
 
+
         binding.root.postDelayed({
             if (user != null) {
-                // Se o utilizador estiver autenticado é redirecionado para a main activity
+                // Se o utilizador estiver autenticado, vai para a MainActivity
                 startActivity(Intent(this, MainActivity::class.java))
             } else {
-                // Se o utilizador não estiver autenticado é redirecionado para a auth activity
-                startActivity(Intent(this, MainActivity::class.java))
+                // Se não estiver autenticado, vai para a AuthActivity
+                startActivity(Intent(this, authActivity::class.java))
             }
-            finish() // Temos de fechar o splash screen para evitar voltar atrás na pilha.
-        }, 2000) // delay de 2 segundos.
+            finish()
+        }, 2000)
     }
 }

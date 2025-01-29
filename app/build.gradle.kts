@@ -46,6 +46,10 @@ dependencies {
     implementation(libs.androidx.camera.lifecycle)
     implementation(libs.androidx.camera.view)
     implementation(libs.androidx.camera.camera2)
+    implementation ("androidx.compose.ui:ui:1.4.0")
+    implementation ("androidx.compose.material:material:1.4.0")
+    implementation ("androidx.compose.runtime:runtime-livedata:1.4.0")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.0")
     implementation("io.coil-kt:coil:2.7.0")
     implementation("com.squareup.picasso:picasso:2.8")
     implementation ("com.google.android.gms:play-services-code-scanner:16.1.0")
@@ -62,7 +66,9 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     implementation(libs.car.ui.lib)
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0") // Altere para moshi, se necessário
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation(libs.androidx.ui.android)
+    implementation(libs.androidx.runtime.android) // Altere para moshi, se necessário
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

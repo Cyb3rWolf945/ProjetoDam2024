@@ -99,7 +99,6 @@ class MainActivity : AppCompatActivity() {
             when (menuItem.itemId) {
                 R.id.item_1 -> {
                     val selectedFragment = Collections()
-                    val selectedFragment = searchUsers()
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, selectedFragment)
                         .commit()

@@ -1,6 +1,7 @@
 package pt.ipt.dam.bookshelf.utils
 
 import android.content.Context
+import pt.ipt.dam.bookshelf.models.UserLogin
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -12,7 +13,7 @@ object UserCacheUtil {
     private const val FILE_NAME = "user_data.ser"
 
     // Salvar o utilizador em cache
-    fun saveUserToCache(context: Context, user: User) {
+    fun saveUserToCache(context: Context, user: UserLogin) {
         val directory: File = context.cacheDir
         val file: File = File(directory, FILE_NAME)
 
@@ -31,14 +32,14 @@ object UserCacheUtil {
     }
 
     // Ler utilizador do ficheiro em cache
-    fun readUserFromCache(context: Context): User? {
+    fun readUserFromCache(context: Context): UserLogin? {
         val directory: File = context.cacheDir
         val file: File = File(directory, FILE_NAME)
 
         try {
             val fileInputStream = FileInputStream(file)
             val objectInputStream = ObjectInputStream(fileInputStream)
-            val user = objectInputStream.readObject() as User
+            val user = objectInputStream.readObject() as UserLogin
             objectInputStream.close()
             fileInputStream.close()
             return user

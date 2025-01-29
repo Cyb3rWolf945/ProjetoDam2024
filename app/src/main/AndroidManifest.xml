@@ -40,9 +40,7 @@
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode_ui" />
 
-        <meta-data
-            android:name="com.google.books.API_KEY"
-            android:value="${BOOKS_API_KEY}" />
+
 
         <activity
             android:name=".ui.auth.authActivity"

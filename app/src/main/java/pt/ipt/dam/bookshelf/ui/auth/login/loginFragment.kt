@@ -24,7 +24,6 @@ class loginFragment : Fragment() {
 
     private val viewModel: LoginViewModel by viewModels()
 
-
     companion object {
         fun newInstance() = loginFragment()
     }
@@ -39,7 +38,7 @@ class loginFragment : Fragment() {
             val email = binding.email.text.toString()
             val password = binding.password.text.toString()
 
-            if(email.equals("") and password.equals("")){
+            if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(requireContext(), "Preencha os campos necessários", Toast.LENGTH_SHORT).show()
             } else {
                 viewModel.login(email, password)
@@ -52,27 +51,26 @@ class loginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.login.observe(viewLifecycleOwner, Observer { resp ->
-            if (resp == "Success"){ //fazer alterações aqui relativamente à resposta do endpoint
+        viewModel.login.observe(viewLifecycleOwner, Observer { loginResponse ->
+            if (loginResponse != null && loginResponse.userid != 0 && loginResponse.nome.isNotEmpty()) {
+
                 val intent = Intent(requireContext(), MainActivity::class.java)
                 startActivity(intent)
                 activity?.finish()
             } else {
-                Toast.makeText(requireContext(), "Campos incorretos", Toast.LENGTH_SHORT).show()
+
+                Toast.makeText(requireContext(), "Campos incorretos ou erro no login", Toast.LENGTH_SHORT).show()
             }
         })
 
-        // clicklistener para transição para o fragment
+        // Transição para o fragmento de registo
         binding.registerLink.setOnClickListener {
-            // Transição para o fragmento de registo
             parentFragmentManager.commit {
                 setReorderingAllowed(true)
                 replace(R.id.fragment_container, registerFragment.newInstance())
             }
         }
     }
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()
