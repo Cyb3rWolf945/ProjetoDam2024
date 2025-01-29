@@ -15,6 +15,7 @@ import pt.ipt.dam.bookshelf.MainActivity
 import pt.ipt.dam.bookshelf.R
 import pt.ipt.dam.bookshelf.databinding.FragmentRegisterBinding
 import pt.ipt.dam.bookshelf.ui.auth.login.loginFragment
+import pt.ipt.dam.bookshelf.utils.ToastUtils
 import java.util.regex.Pattern
 
 class registerFragment : Fragment() {
@@ -44,17 +45,17 @@ class registerFragment : Fragment() {
         //tratar a resposta da do endpoint na API (só tem uma resposta, as restantes verificações estão do lado do Android)
         viewModel.value.observe(viewLifecycleOwner, Observer { resp ->
             if(resp == "Email já está a ser utilizado"){
-                Toast.makeText(requireContext(), "Email já está a ser utilizado", Toast.LENGTH_SHORT).show()
+                ToastUtils.showCustomToast(requireContext(), "Email já está a ser utilizado!")
             }
         })
 
         binding.loginButton.setOnClickListener{
             //verificar se o conteúdo nos campos das passwords é diferente
             if((binding.passwordText.text.toString() != binding.confirmPasswordText.text.toString())){
-                Toast.makeText(requireContext(), "As passwords não coincidem", Toast.LENGTH_SHORT).show()
+                ToastUtils.showCustomToast(requireContext(), "As passwords não coincidem")
                 //verificar se o regex está correto nos campos do email ou da password
             } else if (!isValidEmail(binding.textEmail.text.toString()) || !isValidPassword(binding.passwordText.text.toString()) ){
-                Toast.makeText(requireContext(), "Verifique se a sua password ou email cumpre os requisitos necessários", Toast.LENGTH_SHORT).show()
+                ToastUtils.showCustomToast(requireContext(), "Confirme se a sua password ou email cumprem os requisitos necessários")
             } else {
                 //se chegou aqui, é porque passou nas verificações
                 viewModel.register(binding.textNome.text.toString(), binding.textApelido.text.toString(), binding.textEmail.text.toString(), binding.passwordText.text.toString())

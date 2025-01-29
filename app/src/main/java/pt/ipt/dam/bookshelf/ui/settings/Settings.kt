@@ -159,6 +159,8 @@ class Settings : Fragment() {
             viewModel.deleteUser(userId)
             dialog.dismiss()
 
+            ToastUtils.showCustomToast(requireContext(), "Conta apagada com sucesso!")
+
             val selectedFragment = loginFragment()
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, selectedFragment)

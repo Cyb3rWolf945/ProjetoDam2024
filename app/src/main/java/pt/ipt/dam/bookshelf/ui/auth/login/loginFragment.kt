@@ -14,6 +14,7 @@ import pt.ipt.dam.bookshelf.MainActivity
 import pt.ipt.dam.bookshelf.R
 import pt.ipt.dam.bookshelf.databinding.FragmentLoginBinding
 import pt.ipt.dam.bookshelf.ui.auth.register.registerFragment
+import pt.ipt.dam.bookshelf.utils.ToastUtils
 import java.util.regex.Pattern
 
 class loginFragment : Fragment() {
@@ -39,7 +40,7 @@ class loginFragment : Fragment() {
             val password = binding.password.text.toString()
 
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(requireContext(), "Preencha os campos necessários", Toast.LENGTH_SHORT).show()
+                ToastUtils.showCustomToast(requireContext(), "Preencha os campos necessários")
             } else {
                 viewModel.login(email, password)
             }
@@ -59,7 +60,7 @@ class loginFragment : Fragment() {
                 activity?.finish()
             } else {
 
-                Toast.makeText(requireContext(), "Campos incorretos ou erro no login", Toast.LENGTH_SHORT).show()
+                ToastUtils.showCustomToast(requireContext(), "Campos incorretos")
             }
         })
 
