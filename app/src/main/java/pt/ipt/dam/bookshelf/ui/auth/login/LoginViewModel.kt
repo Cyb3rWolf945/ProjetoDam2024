@@ -12,6 +12,7 @@ import pt.ipt.dam.bookshelf.Services.Service
 import pt.ipt.dam.bookshelf.models.LoginResponse
 import pt.ipt.dam.bookshelf.models.UserLogin
 import pt.ipt.dam.bookshelf.models.Utilizadores
+import pt.ipt.dam.bookshelf.utils.ToastUtils
 import pt.ipt.dam.bookshelf.utils.UserCacheUtil
 import retrofit2.Call
 import retrofit2.Response
@@ -42,12 +43,13 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                     val resp = response.body()
                     if (resp != null) {
                         _login.value = resp
-
                         UserPreferences.saveUser(resp.userid, resp.nome)
+
                     }
                     Log.v("teste", response.body().toString())
                 } else {
                     _login.value = LoginResponse(userid = 0, nome = "Erro ao fazer login")
+                    ToastUtils.showCustomToast(getApplication(), "Erro ao fazer login")
                 }
             }
 

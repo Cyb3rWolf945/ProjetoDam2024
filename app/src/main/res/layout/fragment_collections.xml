@@ -23,7 +23,7 @@
          <TextView
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:text="Coleções de"
+             android:text="@string/cole_es_de"
              android:textSize="16sp"
              android:fontFamily="@font/poppins_medium"
              android:textColor="#000000" />
@@ -57,7 +57,7 @@
           android:fontFamily="@font/poppins_semi_bold"
           android:textColor="#000000"
           android:layout_gravity="center"
-          android:text="Adicionar coleção"
+          android:text="@string/adicionar_cole_o2"
           android:textSize="16sp" />
 
    </LinearLayout>

@@ -20,7 +20,7 @@
             android:id="@+id/textNome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nome da Coleção"
+            android:text="@string/nome_da_cole_o"
             android:textSize="18sp"
             android:fontFamily="@font/poppins_bold"
             android:textColor="#000000"/>
@@ -29,7 +29,7 @@
             android:id="@+id/textIsPublic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Público/Privado"
+            android:text="@string/p_blico_privado"
             android:textSize="14sp"
             android:fontFamily="@font/poppins_medium"
             android:textColor="#666666"
