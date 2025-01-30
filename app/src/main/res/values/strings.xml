@@ -51,4 +51,17 @@
     <string name="nome_da_cole_o">Nome da Coleção</string>
     <string name="p_blico_privado">Público/Privado</string>
     <string name="bookshelf">Bookshelf</string>
+    <string name="apagar_conta">Apagar Conta</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="password2">Password</string>
+    <string name="nome2">Nome</string>
+    <string name="apelido2">Apelido</string>
+    <string name="email2">Email</string>
+    <string name="password3">Password</string>
+    <string name="cancelar2">Cancelar</string>
+    <string name="efetuar_altera_es">Efetuar alterações</string>
+    <string name="editar_perfil2">Editar Perfil</string>
+    <string name="sobre_n_s1">Sobre Nós</string>
+    <string name="texto">texto</string>
+    <string name="ok">OK</string>
 </resources>

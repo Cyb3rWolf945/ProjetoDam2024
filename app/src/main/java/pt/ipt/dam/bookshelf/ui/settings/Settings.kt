@@ -72,19 +72,11 @@ class Settings : Fragment() {
 
         deleteAccount.setOnClickListener {
             showPopupDeleteUser(
-                "Deletar Conta",
+                "Eliminar Conta",
                 "Tem a certeza que quer apagar a sua conta?"
             )
         }
 
-
-        viewModel.updateSuccess.observe(viewLifecycleOwner, { success ->
-            if (success) {
-                Toast.makeText(context, "Dados atualizados com sucesso!", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(context, "Erro ao atualizar os dados.", Toast.LENGTH_SHORT).show()
-            }
-        })
 
         return view
     }
@@ -97,52 +89,57 @@ class Settings : Fragment() {
         val editEmail = dialogView.findViewById<EditText>(R.id.editTextEmail)
         val editPassword = dialogView.findViewById<EditText>(R.id.editTextPassword)
         val editApelido = dialogView.findViewById<EditText>(R.id.editTextApelido)
+        val buttonCancel = dialogView.findViewById<Button>(R.id.buttonCancel)
+        val buttonSave = dialogView.findViewById<Button>(R.id.buttonSave)
 
-
-        val preferences = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        val userId = preferences.getInt("userid", -1)
-
-        AlertDialog.Builder(context)
-            .setTitle(title)
+        val dialog = AlertDialog.Builder(context)
             .setView(dialogView)
-            .setPositiveButton("Alterar os Dados") { _, _ ->
-                val name = editName.text.toString()
-                val email = editEmail.text.toString()
-                val password = editPassword.text.toString()
-                val apelido = editApelido.text.toString()
+            .create()
 
-                if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
-                    if (isValidPassword(password) && isValidEmail(email)){
-                        viewModel.updateUser(name, email, password, apelido)
-                    } else {
-                        ToastUtils.showCustomToast(requireContext(), "Todos os campos devem ser preenchidos corretamente")
-                        //Toast.makeText(requireContext(), "Todos os campos devem ser preenchidos corretamente!", Toast.LENGTH_SHORT).show()
-                    }
+        buttonCancel.setOnClickListener {
+            dialog.dismiss()
+        }
 
+        buttonSave.setOnClickListener {
+            val name = editName.text.toString()
+            val email = editEmail.text.toString()
+            val password = editPassword.text.toString()
+            val apelido = editApelido.text.toString()
+
+            if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
+                if (isValidPassword(password) && isValidEmail(email)) {
+                    viewModel.updateUser(name, email, password, apelido)
+                    ToastUtils.showCustomToast(requireContext(), "Dados atualizados com sucesso!")
+                    dialog.dismiss()
                 } else {
-                    ToastUtils.showCustomToast(requireContext(), "Todos os campos devem ser preenchidos")
+                    ToastUtils.showCustomToast(requireContext(), "Todos os campos devem ser preenchidos corretamente")
                 }
+            } else {
+                ToastUtils.showCustomToast(requireContext(), "Todos os campos devem ser preenchidos")
             }
-            .setNegativeButton("Cancelar", null)
-            .show()
+        }
+
+        dialog.show()
     }
 
     private fun showPopupSobre(title: String, message: String) {
-        val dialog = AlertDialog.Builder(requireContext())
-            .setTitle(title)
-            .setMessage(message)
-            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+        val context = requireContext()
+        val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_sobre, null)
+
+        val textMessage = dialogView.findViewById<TextView>(R.id.textMessage)
+        val buttonOk = dialogView.findViewById<Button>(R.id.buttonOk)
+
+
+        textMessage.text = message
+
+        val dialog = AlertDialog.Builder(context)
+            .setView(dialogView)
             .create()
 
-        dialog.setOnShowListener {
-            val titleTextView = dialog.findViewById<TextView>(android.R.id.title)
-            val messageTextView = dialog.findViewById<TextView>(android.R.id.message)
-
-            titleTextView?.textSize = 40f
-            messageTextView?.textSize = 16f
+        buttonOk.setOnClickListener {
+            dialog.dismiss()
         }
 
-        dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_sobre)
         dialog.show()
     }
 
