@@ -30,7 +30,7 @@
                 android:id="@+id/titleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Title"
+                android:text="@string/t_tulo"
                 android:fontFamily="@font/poppins_semi_bold"
                 android:lineHeight="32dp"
                 android:textColor="@color/black"
@@ -49,7 +49,7 @@
                 android:id="@+id/authorsTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Authors"
+                android:text="@string/autores"
                 android:fontFamily="@font/poppins_medium"
                 android:textSize="16sp"
                 android:gravity="center"
@@ -77,7 +77,7 @@
                         android:id="@+id/publishedDateTextView_Title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Pub Date"
+                        android:text="@string/publicado"
                         android:textSize="14sp"
                         android:textColor="@color/black"
                         android:layout_marginBottom="4dp" />
@@ -86,12 +86,12 @@
                         android:id="@+id/publishedDateTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Published Date"
+                        android:text="@string/published_date"
                         android:textSize="14sp"
                         android:textColor="@color/black" />
                 </LinearLayout>
 
-                <!-- Page Count Section -->
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
                         android:id="@+id/pagesTextView_Title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Page Count"
+                        android:text="@string/n_mero_p_ginas"
                         android:textSize="14sp"
                         android:textColor="@color/black"
                         android:layout_marginBottom="4dp" />
@@ -118,7 +118,7 @@
                         android:textColor="@color/black" />
                 </LinearLayout>
 
-                <!-- Average Rating Section -->
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
                         android:id="@+id/averageRatingTextView_Title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Average Rating"
+                        android:text="@string/average_rating"
                         android:textSize="14sp"
                         android:textColor="@color/black"
                         android:layout_marginBottom="4dp" />
@@ -140,7 +140,7 @@
                         android:id="@+id/averageRatingTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Average Rating"
+                        android:text="@string/average_rating2"
                         android:textSize="14sp"
                         android:textColor="@color/black" />
                 </LinearLayout>
@@ -150,11 +150,11 @@
                 android:id="@+id/descriptionTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Description"
+                android:text="@string/description"
                 android:textSize="16sp"
                 android:layout_marginTop="8dp" />
 
-            <!-- Buttons inside same LinearLayout to fix the issue -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -172,7 +172,7 @@
                     android:fontFamily="@font/poppins_semi_bold"
                     android:textColor="#000000"
                     android:layout_gravity="center"
-                    android:text="Adicionar coleção"
+                    android:text="@string/adicionar_cole_o"
                     android:textSize="16sp"
                     android:layout_marginEnd="8dp" />
 
@@ -187,7 +187,7 @@
                     android:fontFamily="@font/poppins_semi_bold"
                     android:textColor="#000000"
                     android:layout_gravity="center"
-                    android:text="Voltar"
+                    android:text="@string/voltar"
                     android:textSize="16sp"
                     android:layout_marginStart="8dp" />
             </LinearLayout>

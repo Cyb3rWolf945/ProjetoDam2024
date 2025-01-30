@@ -28,7 +28,7 @@ class BooksAdapter(private val books: List<Livros>) : RecyclerView.Adapter<Books
             binding.titleTextView.text = book.nome
             binding.authorTextView.text = book.autor
             binding.descriptionTextView.text = book.descricao
-            binding.categoryTextView.text = book.ISBN // Aqui podes substituir por uma categoria, se houver
+            binding.categoryTextView.text = book.ISBN
 
             book.url.let {
                 val imageUrl = it.replace("http:", "https:")

@@ -26,14 +26,14 @@
                 android:layout_width="100dp"
                 android:layout_height="120dp"
                 android:scaleType="centerCrop"
-                android:contentDescription="Book cover image" />
+                android:contentDescription="@string/book_cover_image" />
 
             <TextView
                 android:id="@+id/authorTextView"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_semi_bold"
-                android:text="Author Name"
+                android:text="Nome Autor"
                 android:textSize="12sp"
                 android:textColor="#666666"
                 android:layout_marginTop="8dp"
@@ -54,7 +54,7 @@
                 android:id="@+id/titleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Book Title"
+                android:text="@string/t_tulo2"
                 android:fontFamily="@font/poppins_bold"
                 android:textSize="18sp"
                 android:textColor="#000000"
@@ -65,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_semi_bold"
-                android:text="Category"
+                android:text="@string/categoria"
                 android:textSize="14sp"
                 android:textColor="#666666"
                 android:layout_marginTop="4dp"
@@ -76,7 +76,7 @@
                 android:id="@+id/descriptionTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Book description goes here..."
+                android:text="@string/descri_o"
                 android:fontFamily="@font/poppins_medium"
                 android:textSize="10sp"
                 android:layout_marginTop="8dp"

@@ -41,7 +41,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Bookshelf"
+                    android:text="@string/bookshelf"
                     android:textColor="@color/black"
                     android:fontFamily="@font/poppins_semi_bold"
                     android:gravity="center"

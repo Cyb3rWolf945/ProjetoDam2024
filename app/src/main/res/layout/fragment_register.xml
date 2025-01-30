@@ -151,7 +151,7 @@
             </LinearLayout>
         </ScrollView>
 
-        <!-- Button and Text Container -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -177,7 +177,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins_semi_bold"
-                android:text="Já tens conta? Inicia sessão!" />
+                android:text="@string/j_tens_conta_inicia_sess_o" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

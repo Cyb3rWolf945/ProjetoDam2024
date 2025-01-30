@@ -120,11 +120,7 @@ class Settings : Fragment() {
                     }
 
                 } else {
-                    Toast.makeText(
-                        context,
-                        "Todos os campos devem ser preenchidos!",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    ToastUtils.showCustomToast(requireContext(), "Todos os campos devem ser preenchidos")
                 }
             }
             .setNegativeButton("Cancelar", null)

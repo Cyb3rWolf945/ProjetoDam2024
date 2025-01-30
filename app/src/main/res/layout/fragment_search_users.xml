@@ -74,7 +74,7 @@
                 android:id="@+id/NomeApelidoText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nome e Apelido"
+                android:text="@string/nome_e_apelido"
                 android:textSize="18sp"
                 android:fontFamily="@font/poppins_bold"
                 android:textColor="#000000"/>
@@ -83,7 +83,7 @@
                 android:id="@+id/EmailText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email"
+                android:text="@string/email"
                 android:textSize="14sp"
                 android:fontFamily="@font/poppins_medium"
                 android:textColor="#666666"

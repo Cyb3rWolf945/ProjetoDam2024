@@ -49,7 +49,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pages"
+                android:text="@string/p_ginas"
                 android:textStyle="bold"/>
 
             <TextView
@@ -68,7 +68,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dimensions"
+                android:text="@string/dimens_es"
                 android:textStyle="bold"/>
 
             <TextView

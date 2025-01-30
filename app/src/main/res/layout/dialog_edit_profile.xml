@@ -9,13 +9,13 @@
         android:id="@+id/editTextNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nome" />
+        android:hint="@string/nomehint" />
 
     <EditText
         android:id="@+id/editTextApelido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Apelido" />
+        android:hint="@string/apelidohint" />
 
     <EditText
         android:id="@+id/editTextEmail"
