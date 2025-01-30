@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         // Seleção da opção 2 do menu e inserção do fragmento no UI.
         //val teste = RetrofitClient.getClient().
 
-        //Seleção da opção 3 do menu e inserção do fragmento no UI.
+        //Seleção da opção 1 do menu e inserção do fragmento no UI.
         binding.bottomNavigation.selectedItemId = R.id.item_1
         val selectedFragment = Collections()
 
@@ -125,10 +125,6 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                 }
                 R.id.item_2 -> {
-                    val selectedFragment = HomeFragment()
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, selectedFragment)
-                        .commit()
                 }
                 R.id.item_3 -> {
                     // Criar e mostrar o PopupMenu para a opção 3
