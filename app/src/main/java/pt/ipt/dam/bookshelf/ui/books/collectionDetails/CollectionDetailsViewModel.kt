@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import pt.ipt.dam.bookshelf.Services.RetrofitClient
 import pt.ipt.dam.bookshelf.Services.Service
 import pt.ipt.dam.bookshelf.models.Livros
+import pt.ipt.dam.bookshelf.models.LivrosResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,19 +19,33 @@ class CollectionDetailsViewModel : ViewModel() {
     private val service = RetrofitClient.client.create(Service::class.java)
 
     fun fetchBooksForCollection(userId: Int, collectionId: Int) {
-        service.getBooksForCollection(userId, collectionId).enqueue(object : Callback<List<Livros>> {
-            override fun onResponse(call: Call<List<Livros>>, response: Response<List<Livros>>) {
+        service.getBooksForCollection(userId, collectionId).enqueue(object : Callback<Map<String, List<LivrosResponse>>> {
+            override fun onResponse(call: Call<Map<String, List<LivrosResponse>>>, response: Response<Map<String, List<LivrosResponse>>>) {
                 if (response.isSuccessful) {
-                    _books.value = response.body()
+                    val livrosResponseList = response.body()?.get("mensagem") ?: emptyList()
+
+                    // Converter LivrosResponse para Livros
+                    val livrosList = livrosResponseList.map { livro ->
+                        Livros(
+                            nome = livro.titulo,
+                            dataemissao = livro.dataemissao,
+                            autor = livro.autor ?: "",
+                            descricao = livro.descricao,
+                            rating = livro.rating,
+                            ISBN = livro.isbn,
+                            paginas = livro.paginas,
+                            url = livro.url ?: ""
+                        )
+                    }
+
+                    _books.value = livrosList
                 } else {
-                    // Handle error response here
-                    //Log.e("CollectionDetailsViewModel", "Error: ${response.code()}")
+                    // Log de erro
                 }
             }
 
-            override fun onFailure(call: Call<List<Livros>>, t: Throwable) {
-                // Handle failure here
-                //Log.e("CollectionDetailsViewModel", "Failure: ${t.message}")
+            override fun onFailure(call: Call<Map<String, List<LivrosResponse>>>, t: Throwable) {
+                // Log de falha
             }
         })
     }

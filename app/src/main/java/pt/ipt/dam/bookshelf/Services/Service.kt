@@ -1,10 +1,9 @@
 package pt.ipt.dam.bookshelf.Services
 import pt.ipt.dam.bookshelf.models.CollectionsResponse
 import pt.ipt.dam.bookshelf.models.Livros
+import pt.ipt.dam.bookshelf.models.LivrosResponse
 import pt.ipt.dam.bookshelf.models.LoginResponse
 import pt.ipt.dam.bookshelf.models.Utilizadores
-import pt.ipt.dam.bookshelf.models.VolumeInfo
-import pt.ipt.dam.bookshelf.models.collection
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -42,7 +41,7 @@ interface Service {
     fun getBooksForCollection(
         @Path("user_id") userId: Int,
         @Path("collection_id") collectionId: Int
-    ): Call<List<Livros>>
+    ): Call<Map<String, List<LivrosResponse>>>
 
     @POST("users/{userId}/livros")
     fun addBook(

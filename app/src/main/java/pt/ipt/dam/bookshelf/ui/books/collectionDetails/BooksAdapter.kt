@@ -26,8 +26,17 @@ class BooksAdapter(private val books: List<Livros>) : RecyclerView.Adapter<Books
 
         fun bind(book: Livros) {
             binding.titleTextView.text = book.nome
-            //binding.authorTextView.text = book. // Assuming the book model has an "autor" field
+            binding.authorTextView.text = book.autor
             binding.descriptionTextView.text = book.descricao
+            binding.categoryTextView.text = book.ISBN // Aqui podes substituir por uma categoria, se houver
+
+            book.url.let {
+                val imageUrl = it.replace("http:", "https:")
+                binding.bookImageView.load(imageUrl) {
+                    crossfade(true)
+                    error(R.drawable.ic_launcher_background)
+                }
+            }
         }
     }
 }
