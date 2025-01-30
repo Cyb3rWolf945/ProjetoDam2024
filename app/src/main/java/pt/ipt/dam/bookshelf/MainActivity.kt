@@ -310,24 +310,34 @@ class MainActivity : AppCompatActivity() {
         val retrofit = RetrofitClient.client
         val bookApi = retrofit.create(Service::class.java)
 
-        // Extract ISBN from industryIdentifiers
+        // Extrair ISBN corretamente
         val isbn = bookInfo.industryIdentifiers?.find { it.type == "ISBN_13" }?.identifier
             ?: bookInfo.industryIdentifiers?.find { it.type == "ISBN_10" }?.identifier
             ?: ""
 
-        // Map VolumeInfo to Livros
+        // Converter lista de autores para string
+        val autor = bookInfo.authors?.joinToString(", ") ?: "Autor desconhecido"
+
+        // Criar objeto Livros compatível com o backend
         val livro = Livros(
-            nome = bookInfo.title ?: "Unknown Title",
+            nome = bookInfo.title ?: "Título Desconhecido",
             dataemissao = bookInfo.publishedDate ?: "",
-            editora = 1,
+            autor = autor,
             descricao = bookInfo.description ?: "",
-            rating = (bookInfo.averageRating?.toFloat() ?: 0f),
-            ISBN = isbn ?: "",
-            paginas = bookInfo.pageCount ?: 0
+            rating = bookInfo.averageRating?.toFloat() ?: 0f,
+            ISBN = isbn,
+            paginas = bookInfo.pageCount ?: 0,
+            url = bookInfo.imageLinks?.thumbnail ?: ""
         )
 
-        // Call the API
-        val call = bookApi.addBook(livro)
+        // Verificar se o userId é válido
+        if (userId == -1) {
+            Log.e("AddBook", "Invalid user ID")
+            return
+        }
+
+        // Chamar a API corretamente
+        val call = bookApi.addBook(userId, livro)
         call.enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {

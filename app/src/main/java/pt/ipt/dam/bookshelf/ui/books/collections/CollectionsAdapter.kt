@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import pt.ipt.dam.bookshelf.databinding.ItemCollectionCardBinding
 import pt.ipt.dam.bookshelf.models.collection
 
-class CollectionsAdapter : RecyclerView.Adapter<CollectionsAdapter.CollectionViewHolder>() {
+class CollectionsAdapter(private val onCollectionClick: (Int) -> Unit) : RecyclerView.Adapter<CollectionsAdapter.CollectionViewHolder>() {
 
     private var collections: List<collection> = emptyList()
 
@@ -17,6 +17,11 @@ class CollectionsAdapter : RecyclerView.Adapter<CollectionsAdapter.CollectionVie
         fun bind(collection: collection) {
             binding.textNome.text = collection.nome
             binding.textIsPublic.text = if (collection.isPublic) "Público" else "Privado"
+
+            // passa o id da colecao
+            binding.root.setOnClickListener {
+                onCollectionClick(collection.idcolecoes)
+            }
         }
     }
 
