@@ -2,8 +2,10 @@ package pt.ipt.dam.bookshelf
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.LocaleList
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -40,6 +42,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import pt.ipt.dam.bookshelf.ui.user_related.searchUsers
+import java.util.Locale
 import java.util.concurrent.ExecutorService
 
 class MainActivity : AppCompatActivity() {
@@ -56,6 +59,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         enableEdgeToEdge()
+        val savedLanguage = UserPreferences.getLocale(this)
+        if (savedLanguage.isNotEmpty()) {
+            setLocale(savedLanguage)
+        }
 
         // se user não existir no sharedpreferences - manda para o login.
 
@@ -267,6 +274,15 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    private fun setLocale(localeToSet: String) {
+        val localeListToSet = LocaleList(Locale(localeToSet))
+        LocaleList.setDefault(localeListToSet)
+        resources.configuration.setLocales(localeListToSet)
+        resources.updateConfiguration(resources.configuration, resources.displayMetrics)
+        val sharedPref = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
+        sharedPref.putString("locale_to_set", localeToSet)
+        sharedPref.apply()
+    }
 
 
 
@@ -297,9 +313,12 @@ class MainActivity : AppCompatActivity() {
             .setPositiveButton("Adicionar") { dialog, _ ->
                 // Handle adding the book to your collection
                 addBookToCollection(bookInfo)
+                binding.bottomNavigation.selectedItemId = R.id.item_1
             }
             .setNegativeButton("Cancelar") { dialog, _ ->
                 dialog.dismiss()
+                binding.bottomNavigation.selectedItemId = R.id.item_1
+
             }
             .show()
     }
@@ -357,5 +376,9 @@ class MainActivity : AppCompatActivity() {
             .setMessage(message)
             .setNegativeButton("Cancel", null)
             .show()
+    }
+
+    fun setBottomNavigationItem(itemId: Int) {
+        binding.bottomNavigation.selectedItemId = itemId
     }
 }

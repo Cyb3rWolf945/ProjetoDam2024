@@ -5,6 +5,7 @@ object UserPreferences {
     private const val PREF_NAME = "user_prefs"
     private const val KEY_USERID = "userid"
     private const val KEY_NOME = "nome"
+    private const val LOCALE_KEY = "locale_key"
 
     private lateinit var preferences: SharedPreferences
 
@@ -33,5 +34,18 @@ object UserPreferences {
 
     fun clearUser() {
         preferences.edit().clear().apply()
+    }
+
+
+    fun saveLocale(language: String, context: Context) {
+        val preferences: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val editor = preferences.edit()
+        editor.putString(LOCALE_KEY, language)
+        editor.apply()
+    }
+
+    fun getLocale(context: Context): String {
+        val preferences: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        return preferences.getString(LOCALE_KEY, "") ?: ""
     }
 }

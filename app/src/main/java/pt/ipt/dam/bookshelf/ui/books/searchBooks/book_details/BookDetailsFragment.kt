@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import coil.load
+import pt.ipt.dam.bookshelf.MainActivity
 import pt.ipt.dam.bookshelf.R
 import pt.ipt.dam.bookshelf.Services.RetrofitClient
 import pt.ipt.dam.bookshelf.Services.Service
@@ -157,6 +158,7 @@ class BookDetailsFragment : Fragment() {
                         .replace(R.id.fragment_container, selectedFragment)
                         .addToBackStack(null)
                         .commit()
+                    (activity as? MainActivity)?.setBottomNavigationItem(R.id.item_1)
                 } else {
                     Log.e("Error", "Failed to add book: ${response.errorBody()?.string()}")
                 }

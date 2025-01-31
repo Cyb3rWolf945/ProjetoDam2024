@@ -15,10 +15,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import pt.ipt.dam.bookshelf.MainActivity
 import pt.ipt.dam.bookshelf.R
 import pt.ipt.dam.bookshelf.ui.auth.authActivity
 import pt.ipt.dam.bookshelf.ui.auth.login.loginFragment
 import pt.ipt.dam.bookshelf.utils.ToastUtils
+import java.util.Locale
 import java.util.regex.Pattern
 
 class Settings : Fragment() {
@@ -41,12 +43,36 @@ class Settings : Fragment() {
         val deleteAccount = view.findViewById<View>(R.id.count_remove)
         val privacy = view.findViewById<View>(R.id.privacy)
         val session = view.findViewById<View>(R.id.close_session)
+        val change_language = view.findViewById<View>(R.id.change_language)
+
 
         session.setOnClickListener{
             clearUser()
             val intent = Intent(requireContext(), authActivity::class.java)
             startActivity(intent)
         }
+
+        change_language.setOnClickListener{
+            val languages = arrayOf("Português", "English")  // Only Portuguese and English
+            val langSelectorBuilder = AlertDialog.Builder(requireContext())
+            langSelectorBuilder.setTitle("Choose language:")
+            langSelectorBuilder.setSingleChoiceItems(languages, -1) { dialog, selection ->
+                when (selection) {
+                    0 -> {
+                        setLocale("pt")  // Set to Portuguese
+                        (activity as? MainActivity)?.setBottomNavigationItem(R.id.item_1)
+                    }
+                    1 -> {
+                        setLocale("en")  // Set to English
+                        (activity as? MainActivity)?.setBottomNavigationItem(R.id.item_1)
+                    }
+                }
+                dialog.dismiss()
+            }
+            langSelectorBuilder.create().show()
+
+        }
+
 
         privacy.setOnClickListener {
             val url = "https://staticdam.onrender.com/"
@@ -189,5 +215,22 @@ class Settings : Fragment() {
 
     fun isValidPassword(password: String): Boolean {
         return Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{8,}\$").matcher(password).matches()
+    }
+
+    private fun setLocale(languageCode: String) {
+        // Save language in SharedPreferences
+        UserPreferences.saveLocale(languageCode, requireContext())
+
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+
+        val resources = requireContext().resources
+        val configuration = resources.configuration
+        configuration.setLocale(locale)
+
+        resources.updateConfiguration(configuration, resources.displayMetrics)
+
+        // Restart current activity
+        requireActivity().recreate()
     }
 }

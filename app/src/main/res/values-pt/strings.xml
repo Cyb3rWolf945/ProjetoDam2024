@@ -1,7 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">BookShelf</string>
     <string name="welcome_to_bookshelf">Bem-vindo ao bookshelf!</string>
-    <string name="welcome_user" translatable="false">Olá Timmy</string>
     <string name="start_reading">Comece a ler</string>
     <string name="what_you_want">O que você quiser?</string>
     <string name="insira_o_nome_de_utilizador">Insira o seu email</string>
@@ -12,10 +12,9 @@
     <string name="enter_registo">Regista-te</string>
     <string name="enter_login">Login</string>
     <string name="register_link">Ainda não tens conta? Regista-te?</string>
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="procurar_utilizadores">Procurar utilizadores</string>
-    <string name="digitalizar_isbn_dos_livros">Digitalizar ISBN dos livros.</string>
-    <string name="procurar_novos_livros">Procurar novos livros.</string>
+    <string name="digitalizar_isbn_dos_livros">Digitalizar ISBN dos livros</string>
+    <string name="procurar_novos_livros">Procurar novos livros</string>
     <string name="tem_a_certeza_que_quer_apagar_a_conta">Tem a certeza que quer apagar a conta?</string>
     <string name="todos_os_dados_ser_o_apagados_permanentemente">Todos os dados serão apagados permanentemente.</string>
     <string name="dimens_es">Dimensões</string>
@@ -25,16 +24,16 @@
     <string name="t_tulo">Título</string>
     <string name="autores">Autores</string>
     <string name="publicado">Publicado</string>
-    <string name="published_date">Published Date</string>
+    <string name="published_date">Data de publicação</string>
     <string name="n_mero_p_ginas">Número páginas</string>
-    <string name="average_rating">Average Rating</string>
-    <string name="average_rating2">Average Rating</string>
-    <string name="description">Description</string>
-    <string name="adicionar_cole_o">Adicionar coleção</string>
+    <string name="average_rating">Rating</string>
+    <string name="average_rating2">Rating</string>
+    <string name="description">Descrição</string>
+    <string name="adicionar_cole_o">Adicionar a coleção</string>
     <string name="voltar">Voltar</string>
     <string name="livros_da_cole_o">Livros da coleção</string>
     <string name="cole_es_de">Coleções de</string>
-    <string name="adicionar_cole_o2">Adicionar coleção</string>
+    <string name="adicionar_cole_o2">Adicionar a coleção</string>
     <string name="j_tens_conta_inicia_sess_o">Já tens conta? Inicia sessão!</string>
     <string name="pesquisar_por_titulo_ou_isbn">Pesquisar por titulo ou ISBN</string>
     <string name="nome_e_apelido">Nome e Apelido</string>
@@ -44,7 +43,7 @@
     <string name="eliminar_conta">Eliminar Conta</string>
     <string name="sobre_n_s">Sobre nós</string>
     <string name="terminar_sess_o">Terminar sessão</string>
-    <string name="book_cover_image">Book cover image</string>
+    <string name="book_cover_image">Imagem de capa</string>
     <string name="t_tulo2">Título</string>
     <string name="categoria">Categoria</string>
     <string name="descri_o">Descrição</string>

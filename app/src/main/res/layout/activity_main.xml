@@ -8,7 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- Include the top_bar.xml layout -->
     <include
         android:id="@+id/topAppBar"
         layout="@layout/top_bar"
