@@ -1,6 +1,8 @@
 package pt.ipt.dam.bookshelf.ui.auth
 
+import android.content.Context
 import android.os.Bundle
+import android.os.LocaleList
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -9,6 +11,7 @@ import androidx.fragment.app.Fragment
 import pt.ipt.dam.bookshelf.Services.RetrofitClient
 import pt.ipt.dam.bookshelf.databinding.ActivityAuthBinding // Import the binding class
 import pt.ipt.dam.bookshelf.ui.auth.login.loginFragment
+import java.util.Locale
 
 class authActivity : AppCompatActivity() {
 
@@ -19,6 +22,11 @@ class authActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         enableEdgeToEdge()
+
+        val savedLanguage = UserPreferences.getLocale(this)
+        if (savedLanguage.isNotEmpty()) {
+            setLocale(savedLanguage)
+        }
 
         val call = RetrofitClient.client
         // Initialize the binding
@@ -43,5 +51,15 @@ class authActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(binding.fragmentContainer.id, fragment)
             .commit()
+    }
+
+    private fun setLocale(localeToSet: String) {
+        val localeListToSet = LocaleList(Locale(localeToSet))
+        LocaleList.setDefault(localeListToSet)
+        resources.configuration.setLocales(localeListToSet)
+        resources.updateConfiguration(resources.configuration, resources.displayMetrics)
+        val sharedPref = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
+        sharedPref.putString("locale_to_set", localeToSet)
+        sharedPref.apply()
     }
 }

@@ -1,7 +1,9 @@
 package pt.ipt.dam.bookshelf.ui
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.LocaleList
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -11,6 +13,7 @@ import pt.ipt.dam.bookshelf.ui.auth.authActivity
 import pt.ipt.dam.bookshelf.ui.auth.login.loginFragment
 import pt.ipt.dam.bookshelf.utils.User
 import pt.ipt.dam.bookshelf.utils.UserCacheUtil
+import java.util.Locale
 
 class SplashScreen : AppCompatActivity() {
 
@@ -18,6 +21,10 @@ class SplashScreen : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
+        val savedLanguage = UserPreferences.getLocale(this)
+        if (savedLanguage.isNotEmpty()) {
+            setLocale(savedLanguage)
+        }
 
         splashScreen.setKeepOnScreenCondition {
             false
@@ -35,7 +42,11 @@ class SplashScreen : AppCompatActivity() {
 
         if (user != null) {
             // existe o first e o secod porque é um par de valores: Pair<Int, String>?
-            binding.splashWelcomeBack.text = "Olá ${user.second}"
+            if (savedLanguage == "pt"){
+                binding.splashWelcomeBack.text = "Olá ${user.second}"
+            }else{
+                binding.splashWelcomeBack.text = "Hello ${user.second}"
+            }
         } else {
             binding.splashWelcomeBack.text = ""
         }
@@ -56,5 +67,15 @@ class SplashScreen : AppCompatActivity() {
             }
             finish()
         }, 2000)
+    }
+
+    private fun setLocale(localeToSet: String) {
+        val localeListToSet = LocaleList(Locale(localeToSet))
+        LocaleList.setDefault(localeListToSet)
+        resources.configuration.setLocales(localeListToSet)
+        resources.updateConfiguration(resources.configuration, resources.displayMetrics)
+        val sharedPref = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
+        sharedPref.putString("locale_to_set", localeToSet)
+        sharedPref.apply()
     }
 }
