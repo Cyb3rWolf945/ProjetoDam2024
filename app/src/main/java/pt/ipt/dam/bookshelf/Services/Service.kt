@@ -49,4 +49,7 @@ interface Service {
         @Body livro: Livros
     ): Call<Void>
 
+    @DELETE("/livros/delete")
+    fun deleteBook(@Query("idlivros") idlivros: Int): Call<Void>
+
 }

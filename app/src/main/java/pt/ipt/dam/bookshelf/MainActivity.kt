@@ -57,6 +57,8 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
         enableEdgeToEdge()
 
+        // se user não existir no sharedpreferences - manda para o login.
+
         userId = intent.getIntExtra("userId", -1)
         userName = intent.getStringExtra("userName")
 

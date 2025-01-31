@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import pt.ipt.dam.bookshelf.R
 import pt.ipt.dam.bookshelf.databinding.FragmentCollectionsBinding
-import pt.ipt.dam.bookshelf.ui.books.collectionDetails.CollectionDetailsFragment
+import pt.ipt.dam.bookshelf.ui.books.collections.collectionDetails.CollectionDetailsFragment
 
 class Collections : Fragment() {
 

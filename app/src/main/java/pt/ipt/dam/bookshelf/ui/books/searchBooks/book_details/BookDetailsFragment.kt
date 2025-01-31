@@ -17,6 +17,7 @@ import pt.ipt.dam.bookshelf.databinding.FragmentBookDetailsBinding
 import pt.ipt.dam.bookshelf.models.BookItem
 import pt.ipt.dam.bookshelf.models.Livros
 import pt.ipt.dam.bookshelf.searchBooks.search_books
+import pt.ipt.dam.bookshelf.ui.books.collections.Collections
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -151,7 +152,11 @@ class BookDetailsFragment : Fragment() {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
                     Log.d("AddBook", "Book added successfully!")
-                    onClose()
+                    val selectedFragment = Collections()
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, selectedFragment)
+                        .addToBackStack(null)
+                        .commit()
                 } else {
                     Log.e("Error", "Failed to add book: ${response.errorBody()?.string()}")
                 }
