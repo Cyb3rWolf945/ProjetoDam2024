@@ -1,4 +1,4 @@
-package pt.ipt.dam.bookshelf.ui.books.collectionDetails
+package pt.ipt.dam.bookshelf.ui.books.collections.collectionDetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,8 +13,8 @@ import retrofit2.Response
 
 class CollectionDetailsViewModel : ViewModel() {
 
-    private val _books = MutableLiveData<List<Livros>>()
-    val books: LiveData<List<Livros>> get() = _books
+    private val _books = MutableLiveData<List<LivrosResponse>>()
+    val books: LiveData<List<LivrosResponse>> get() = _books
 
     private val service = RetrofitClient.client.create(Service::class.java)
 
@@ -26,13 +26,14 @@ class CollectionDetailsViewModel : ViewModel() {
 
                     // Converter LivrosResponse para Livros
                     val livrosList = livrosResponseList.map { livro ->
-                        Livros(
-                            nome = livro.titulo,
+                        LivrosResponse(
+                            idlivros = livro.idlivros,
+                            titulo = livro.titulo,
                             dataemissao = livro.dataemissao,
                             autor = livro.autor ?: "",
                             descricao = livro.descricao,
                             rating = livro.rating,
-                            ISBN = livro.isbn,
+                            isbn = livro.isbn,
                             paginas = livro.paginas,
                             url = livro.url ?: ""
                         )

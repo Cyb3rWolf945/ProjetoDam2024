@@ -5,84 +5,100 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="16dp"
-    app:cardElevation="4dp"
-    >
+    app:cardElevation="4dp">
 
-    <LinearLayout
+    <!-- FrameLayout para permitir posicionamento absoluto -->
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        android:background="@drawable/rounded_background_cards">
+        android:layout_height="wrap_content">
 
+        <!-- LinearLayout contendo o conteúdo principal do card -->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:background="@drawable/rounded_background_cards">
 
-            <ImageView
-                android:id="@+id/bookImageView"
-                android:layout_width="100dp"
-                android:layout_height="120dp"
-                android:scaleType="centerCrop"
-                android:contentDescription="Book cover image" />
-
-            <TextView
-                android:id="@+id/authorTextView"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_semi_bold"
-                android:text="Author Name"
-                android:textSize="12sp"
-                android:textColor="#666666"
-                android:layout_marginTop="8dp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:gravity="center_horizontal" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginStart="16dp"
-            android:gravity="start">
-
-            <TextView
-                android:id="@+id/titleTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Book Title"
-                android:fontFamily="@font/poppins_bold"
-                android:textSize="18sp"
-                android:textColor="#000000"
-                android:gravity="start" />
-
-            <TextView
-                android:id="@+id/categoryTextView"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_semi_bold"
-                android:text="Category"
-                android:textSize="14sp"
-                android:textColor="#666666"
-                android:layout_marginTop="4dp"
-                android:padding="4dp"
-                android:gravity="start" />
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
-            <TextView
-                android:id="@+id/descriptionTextView"
-                android:layout_width="match_parent"
+                <ImageView
+                    android:id="@+id/bookImageView"
+                    android:layout_width="100dp"
+                    android:layout_height="120dp"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Book cover image" />
+
+                <TextView
+                    android:id="@+id/authorTextView"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Author Name"
+                    android:textSize="12sp"
+                    android:textColor="#666666"
+                    android:layout_marginTop="8dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:gravity="center_horizontal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Book description goes here..."
-                android:fontFamily="@font/poppins_medium"
-                android:textSize="10sp"
-                android:layout_marginTop="8dp"
-                android:maxLines="3"
-                android:ellipsize="end"
-                android:gravity="start" />
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="16dp"
+                android:gravity="start">
+
+                <TextView
+                    android:id="@+id/titleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Book Title"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="18sp"
+                    android:textColor="#000000"
+                    android:gravity="start" />
+
+                <TextView
+                    android:id="@+id/categoryTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:text="Category"
+                    android:textSize="14sp"
+                    android:textColor="#666666"
+                    android:layout_marginTop="4dp"
+                    android:padding="4dp"
+                    android:gravity="start" />
+
+                <TextView
+                    android:id="@+id/descriptionTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Book description goes here..."
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="10sp"
+                    android:layout_marginTop="8dp"
+                    android:maxLines="3"
+                    android:ellipsize="end"
+                    android:gravity="start" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+
+        <ImageView
+            android:id="@+id/removeButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/remover"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="8dp"
+            android:contentDescription="Close Button" />
+    </FrameLayout>
 </androidx.cardview.widget.CardView>

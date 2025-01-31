@@ -78,19 +78,18 @@
             app:dividerThickness="2dp"/>
 
         <LinearLayout
-            android:id="@+id/count_remove"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/about"
             android:orientation="horizontal"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="12dp"
             android:gravity="center_vertical">
 
             <TextView
-                android:textColor="#FF0000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Eliminar Conta"
+                android:text="Sobre nós"
                 android:layout_weight="1"
                 android:fontFamily="@font/poppins_semi_bold"
                 android:textSize="18sp"
@@ -104,25 +103,28 @@
 
         </LinearLayout>
 
+
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:dividerColor="@color/buttonsColor"
             app:dividerThickness="2dp"/>
 
+
         <LinearLayout
+            android:id="@+id/count_remove"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/about"
             android:orientation="horizontal"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="12dp"
             android:gravity="center_vertical">
 
             <TextView
+                android:textColor="#FF0000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sobre nós"
+                android:text="Eliminar Conta"
                 android:layout_weight="1"
                 android:fontFamily="@font/poppins_semi_bold"
                 android:textSize="18sp"
