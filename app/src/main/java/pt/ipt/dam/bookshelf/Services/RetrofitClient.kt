@@ -10,7 +10,7 @@ object RetrofitClient {
         get() {
             if (retrofit == null) {
                 retrofit = Retrofit.Builder()
-                    .baseUrl("http://192.168.1.102:8000")
+                    .baseUrl("https://apidam-ftfvhaf7djdvd5fr.canadacentral-01.azurewebsites.net")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
             }
