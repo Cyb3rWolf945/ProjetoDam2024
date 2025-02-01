@@ -254,7 +254,7 @@ class MainActivity : AppCompatActivity() {
                 val rawValue = barcode.rawValue // Retrieve the raw value of the barcode
                 // Do something with the rawValue (like displaying or processing)
                 if (rawValue != null) {
-                    viewModel.fetchBookInfo(rawValue, "AIzaSyBJaKQAJgsSeHOOdY0uZVhufLBDZN-Ps7I")
+                    viewModel.fetchBookInfo(rawValue, BuildConfig.BOOKS_API_KEY)
                 }
                 binding.bottomNavigation.selectedItemId = R.id.item_2 // para mudar de sitio
                 Toast.makeText(this, "Barcode detected: $rawValue", Toast.LENGTH_SHORT).show()

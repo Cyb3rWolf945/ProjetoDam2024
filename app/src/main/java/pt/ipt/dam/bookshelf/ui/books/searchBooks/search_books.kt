@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import pt.ipt.dam.bookshelf.BuildConfig
 import pt.ipt.dam.bookshelf.R
 import pt.ipt.dam.bookshelf.databinding.FragmentSearchBooksBinding
 import pt.ipt.dam.bookshelf.ui.books.searchBooks.book_details.BookDetailsFragment
@@ -61,7 +62,7 @@ class search_books : Fragment() {
         binding.searchButton.setOnClickListener {
             val query = binding.searchInputText.text.toString().trim()
             if (query.isNotBlank()) {
-                viewModel.searchBooks(query, "AIzaSyBJaKQAJgsSeHOOdY0uZVhufLBDZN-Ps7I")
+                viewModel.searchBooks(query, BuildConfig.BOOKS_API_KEY)
             }
         }
     }
