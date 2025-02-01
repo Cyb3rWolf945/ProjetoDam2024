@@ -1,11 +1,18 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.secrets.gradle.plugin)}
+}
 
 android {
     namespace = "pt.ipt.dam.bookshelf"
     compileSdk = 35
+
+    val file = rootProject.file("local.properties")
+    val properties = Properties()
+    properties.load(FileInputStream(file))
 
     defaultConfig {
         applicationId = "pt.ipt.dam.bookshelf"
@@ -14,10 +21,17 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        buildConfigField("String", "BOOKS_API_KEY", properties.getProperty("BOOKS_API_KEY"))
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
+
+        debug {
+            buildConfigField("String", "BOOKS_API_KEY", properties.getProperty("BOOKS_API_KEY"))
+        }
+
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -38,6 +52,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
     
 

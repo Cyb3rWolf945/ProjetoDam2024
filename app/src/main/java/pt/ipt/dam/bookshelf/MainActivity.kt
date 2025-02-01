@@ -35,9 +35,7 @@ import pt.ipt.dam.bookshelf.models.Livros
 import pt.ipt.dam.bookshelf.models.VolumeInfo
 import pt.ipt.dam.bookshelf.searchBooks.search_books
 import pt.ipt.dam.bookshelf.ui.books.collections.Collections
-import pt.ipt.dam.bookshelf.ui.home_component.HomeFragment
 import pt.ipt.dam.bookshelf.ui.settings.Settings
-import pt.ipt.dam.bookshelf.ui.user_profile_component.user_profile
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
