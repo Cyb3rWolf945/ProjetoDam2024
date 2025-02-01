@@ -13,8 +13,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import coil.load
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import pt.ipt.dam.bookshelf.R
 import pt.ipt.dam.bookshelf.databinding.FragmentCollectionDetailsBinding
 import pt.ipt.dam.bookshelf.models.LivrosResponse
@@ -23,6 +27,7 @@ class CollectionDetailsFragment : Fragment(), SensorEventListener {
 
     private val viewModel: CollectionDetailsViewModel by viewModels()
     private var _binding: FragmentCollectionDetailsBinding? = null
+    private lateinit var savedLanguage: String
     private val binding get() = _binding!!
 
     // var para o sensor do giroscopio
@@ -94,6 +99,7 @@ class CollectionDetailsFragment : Fragment(), SensorEventListener {
     override fun onResume() {
         super.onResume()
         lastUpdate = System.currentTimeMillis()
+        savedLanguage = UserPreferences.getLocale(requireContext())
     }
 
     override fun onPause() {
@@ -159,14 +165,35 @@ class CollectionDetailsFragment : Fragment(), SensorEventListener {
     private fun showRandomBookDialog() {
         val randomBook = booksAdapter.getRandomBook()
         if (randomBook != null) {
-            AlertDialog.Builder(requireContext())
-                .setTitle("Livro Aleatório")
-                .setMessage("Livro Selecionado: ${randomBook.titulo}")
-                .setPositiveButton("Fechar") { dialog, _ ->
+            val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_book_info, null)
+
+            val coverImageView = dialogView.findViewById<ImageView>(R.id.coverImageView)
+            val ratingTextView = dialogView.findViewById<TextView>(R.id.ratingTextView)
+            val pagesTextView = dialogView.findViewById<TextView>(R.id.pagesTextView)
+            val dimensionsTextView = dialogView.findViewById<TextView>(R.id.dimensionsTextView)
+            val buttonTextAccept = if (savedLanguage == "pt") "Ler" else "Read"
+            val buttonTextCancel = if (savedLanguage == "pt") "Cancelar" else "Cancel"
+
+            val imageUrl = randomBook.url.replace("http:", "https:")
+            coverImageView.load(imageUrl) {
+                crossfade(true)
+                error(R.drawable.ic_launcher_background)
+            }
+
+            // Define os textos com os dados do livro
+            ratingTextView.text = randomBook.rating?.let { String.format("%.1f", it) } ?: "N/A"
+            pagesTextView.text = randomBook.paginas?.toString() ?: "N/A"
+            dimensionsTextView.text = "A4"
+
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(randomBook.titulo)
+                .setView(dialogView)
+                .setPositiveButton(buttonTextAccept) { dialog, _ ->
                     dialog.dismiss()
-                    binding.toggleSensorButton.isEnabled = true
                 }
-                .create()
+                .setNegativeButton(buttonTextCancel) { dialog, _ ->
+                    dialog.dismiss()
+                }
                 .show()
         }
     }

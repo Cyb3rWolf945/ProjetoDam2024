@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cameraExecutor: ExecutorService
     private var userId: Int = -1
     private var userName: String? = null
+    private lateinit var savedLanguage: String
 
     // ViewModel responsavel pelo dialog de adição do livro
     private lateinit var viewModel: BookInfoViewModel
@@ -57,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         enableEdgeToEdge()
-        val savedLanguage = UserPreferences.getLocale(this)
+        savedLanguage = UserPreferences.getLocale(this)
         if (savedLanguage.isNotEmpty()) {
             setLocale(savedLanguage)
         }
@@ -293,6 +294,9 @@ class MainActivity : AppCompatActivity() {
         val pagesTextView = dialogView.findViewById<TextView>(R.id.pagesTextView)
         val dimensionsTextView = dialogView.findViewById<TextView>(R.id.dimensionsTextView)
 
+        val buttonTextAccept = if (savedLanguage == "pt") "Adicionar" else "Add"
+        val buttonTextCancel = if (savedLanguage == "pt") "Cancelar" else "Cancel"
+
 
         val imageUrl = bookInfo.imageLinks?.thumbnail?.replace("http:", "https:")
         coverImageView.load(imageUrl) {
@@ -308,12 +312,12 @@ class MainActivity : AppCompatActivity() {
         MaterialAlertDialogBuilder(this)
             .setTitle(bookInfo.title)
             .setView(dialogView)
-            .setPositiveButton("Adicionar") { dialog, _ ->
+            .setPositiveButton(buttonTextAccept) { dialog, _ ->
                 // Handle adding the book to your collection
                 addBookToCollection(bookInfo)
                 binding.bottomNavigation.selectedItemId = R.id.item_1
             }
-            .setNegativeButton("Cancelar") { dialog, _ ->
+            .setNegativeButton(buttonTextCancel) { dialog, _ ->
                 dialog.dismiss()
                 binding.bottomNavigation.selectedItemId = R.id.item_1
 
