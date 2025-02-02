@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import pt.ipt.dam.bookshelf.R
 
+/***
+ * Classe acabou por não ser implementada na versão atual
+ */
 class HomeFragment : Fragment() {
 
     companion object {

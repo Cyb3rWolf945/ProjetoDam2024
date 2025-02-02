@@ -1,23 +1,22 @@
 package pt.ipt.dam.bookshelf.ui.auth.register
 
-import android.content.Intent
 import androidx.fragment.app.viewModels
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.commit
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import pt.ipt.dam.bookshelf.MainActivity
 import pt.ipt.dam.bookshelf.R
 import pt.ipt.dam.bookshelf.databinding.FragmentRegisterBinding
 import pt.ipt.dam.bookshelf.ui.auth.login.loginFragment
 import pt.ipt.dam.bookshelf.utils.ToastUtils
 import java.util.regex.Pattern
 
+/***
+ * Classe responsavel por tratar do fragmento registo e receber a resposta do viewModel, para alterações de UI.
+ */
 class registerFragment : Fragment() {
 
     // Usar View Binding

@@ -13,6 +13,11 @@ import pt.ipt.dam.bookshelf.models.LivrosResponse
 import retrofit2.Call
 import retrofit2.Response
 
+/***
+ *  Este adapter é responsavel por colocar os livros no recycler View e preenceher desta forma o layout.
+ *  recebe por parametro:
+ *  books -> livros que já foram previamente recebidos pela API no fragmento CollectionDetails.
+ */
 class BooksAdapter(private var books: MutableList<LivrosResponse>) :
     RecyclerView.Adapter<BooksAdapter.BookViewHolder>() {
 
@@ -33,7 +38,8 @@ class BooksAdapter(private var books: MutableList<LivrosResponse>) :
 
     override fun getItemCount(): Int = books.size
 
-    class BookViewHolder(private val binding: ItemBookCardBinding) :
+    // inner classe para realizar o binding no layout - utilizamos o Coil para as imagens.
+    inner class BookViewHolder(private val binding: ItemBookCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(book: LivrosResponse, adapter: BooksAdapter) {
@@ -56,6 +62,9 @@ class BooksAdapter(private var books: MutableList<LivrosResponse>) :
             }
         }
 
+        /***
+         * Função responsavél por eleminar um livro -- na prática não esta implementada.
+         */
         fun deleteBook(livroId: Int, adapter: BooksAdapter) {
             RetrofitClient.client.create(Service::class.java)
                 .deleteBook(livroId)
@@ -75,6 +84,9 @@ class BooksAdapter(private var books: MutableList<LivrosResponse>) :
         }
     }
 
+    /***
+     * Função responsavél por eleminar um livro -- na prática não esta implementada.
+     */
     fun removeBookById(id: Int) {
         val indexToRemove = books.indexOfFirst { it.idlivros == id }
         if (indexToRemove != -1) {

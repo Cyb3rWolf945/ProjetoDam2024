@@ -2,7 +2,6 @@ package pt.ipt.dam.bookshelf.ui.books.collections
 
 import androidx.fragment.app.viewModels
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +11,10 @@ import pt.ipt.dam.bookshelf.R
 import pt.ipt.dam.bookshelf.databinding.FragmentCollectionsBinding
 import pt.ipt.dam.bookshelf.ui.books.collections.collectionDetails.CollectionDetailsFragment
 
+/***
+ * Classe responsavél pelo Fragmento das coleções.
+ * Exibe as coleções de livros de um utilizador no recyclerView.
+ */
 class Collections : Fragment() {
 
     private val viewModel: CollectionsViewModel by viewModels()
@@ -30,6 +33,10 @@ class Collections : Fragment() {
         return binding.root
     }
 
+    /***
+     * Quando a vista esta criada podemos aceder aos argumentos recebidos por param pela atividade.
+     * Aqui vamos fazer binding do nome do utilizador e fazer fetch a API.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -49,6 +56,9 @@ class Collections : Fragment() {
         }
     }
 
+    /***
+     * Definir observable para saber quando a variavel LiveData no viewModel recebe algo.
+     */
     private fun setupObservers() {
         viewModel.books.observe(viewLifecycleOwner) { collections ->
             collectionsAdapter.updateCollections(collections)
@@ -56,6 +66,9 @@ class Collections : Fragment() {
     }
 
 
+    /***
+     * Atribuir o adapter e o layout manager ao recyclerView
+     */
     private fun setupRecyclerView() {
         collectionsAdapter = CollectionsAdapter { collectionId ->
             openCollectionDetails(collectionId)
@@ -66,6 +79,9 @@ class Collections : Fragment() {
         }
     }
 
+    /***
+     * Função responsavél por cliclar na coleção e abrir fragmento com a lista de livros.
+     */
     private fun openCollectionDetails(collectionId: Int) {
         val fragment = CollectionDetailsFragment().apply {
             arguments = Bundle().apply {

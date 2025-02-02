@@ -1,6 +1,5 @@
 package pt.ipt.dam.bookshelf.ui.auth.register
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,6 +10,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/***
+ *  Esta classe vai ser responsavél por tratar da logica de pedidos a API.
+ *  Usa variavel LiveData para armazenar o resultado da resposta de registo em caso de sucesso ou falha.
+ *  Utiliza um costum Toast para fazer display de mensagens de erro ou sucesso.
+ */
 class RegisterViewModel : ViewModel() {
     // TODO: Implement the ViewModel
     private val _value = MutableLiveData<String>()

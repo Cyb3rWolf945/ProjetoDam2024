@@ -11,11 +11,11 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import pt.ipt.dam.bookshelf.R
-import pt.ipt.dam.bookshelf.models.Utilizadores
 
+/***
+ * classe responsavél pela pesquisa de utilizadores.
+ */
 class searchUsers : Fragment() {
 
     private val viewModel: SearchUsersViewModel by viewModels()

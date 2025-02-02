@@ -11,6 +11,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/***
+ * ViewModel responsavél pela pesquisa de utilizadores da API.
+ * Em caso de sucesso: devolve um utilizador para ser inserido no cartão.
+ * Em caso de erro: não devolve nada para ser usado no fragmento.
+ */
 class SearchUsersViewModel : ViewModel() {
     private val _users = MutableLiveData<Utilizadores>()
     val users: LiveData<Utilizadores> get() = _users

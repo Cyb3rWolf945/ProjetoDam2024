@@ -1,22 +1,23 @@
 package pt.ipt.dam.bookshelf.ui.auth.login
 
 import android.app.Application
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import pt.ipt.dam.bookshelf.Services.RetrofitClient
 import pt.ipt.dam.bookshelf.Services.Service
 import pt.ipt.dam.bookshelf.models.LoginResponse
-import pt.ipt.dam.bookshelf.models.UserLogin
 import pt.ipt.dam.bookshelf.models.Utilizadores
 import pt.ipt.dam.bookshelf.utils.ToastUtils
-import pt.ipt.dam.bookshelf.utils.UserCacheUtil
 import retrofit2.Call
 import retrofit2.Response
 
+/***
+ *  Esta classe vai ser responsavél por tratar da logica de pedidos a API.
+ *  Usa variavel LiveData para armazenar o resultado da resposta de login em caso de sucesso ou falha.
+ *  Utiliza um costum Toast para fazer display de mensagens de erro ou sucesso.
+ */
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _login = MutableLiveData<LoginResponse?>()
@@ -44,7 +45,6 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                     if (resp != null) {
                         _login.value = resp
                         UserPreferences.saveUser(resp.userid, resp.nome)
-
                     }
                     Log.v("teste", response.body().toString())
                 } else {

@@ -6,4 +6,7 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">192.168.1.102</domain>
     </domain-config>
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">apidam-ftfvhaf7djdvd5fr.canadacentral-01.azurewebsites.net</domain>
+    </domain-config>
 </network-security-config>

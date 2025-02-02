@@ -43,6 +43,11 @@ import pt.ipt.dam.bookshelf.ui.user_related.searchUsers
 import java.util.Locale
 import java.util.concurrent.ExecutorService
 
+/***
+ * Classe da atividade principal da aplicação.
+ * Está classe está responsavel por ser a classe da atividade mãe para todos os fragmentos.
+ * (sempre que um fragmento precisa de um context, vem buscar a esta classe).
+ */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -90,22 +95,20 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigation.menu.findItem(R.id.item_2)?.isVisible = false
 
-        // Initialize ViewModel
         viewModel = ViewModelProvider(this).get(BookInfoViewModel::class.java)
 
-        // Observe LiveData
+        /***
+         * Observable para a variavel bookInfoState.
+         */
         viewModel.bookInfoState.observe(this, Observer { state ->
             when (state) {
                 is BookInfoState.Loading -> {
-                    // Show loading dialog or progress
                     //showLoadingDialog()
                 }
                 is BookInfoState.Success -> {
-                    // Update the dialog with book information
                     showSuccessDialog(state.bookInfo)
                 }
                 is BookInfoState.Error -> {
-                    // Show error message
                     showErrorDialog(state.message)
                 }
             }
@@ -170,7 +173,7 @@ class MainActivity : AppCompatActivity() {
         val layoutInflater = getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view: View = layoutInflater.inflate(R.layout.custom_popup_menu, null)
 
-        // Defina o comportamento dos itens do menu aqui
+        // Defina o comportamento dos itens do menu aqui.
         val option1: TextView = view.findViewById(R.id.option1)
         val option2: TextView = view.findViewById(R.id.option2)
 
@@ -216,6 +219,9 @@ class MainActivity : AppCompatActivity() {
 
     //CAMARA FUNCTIONS
 
+    /***
+     * Permissões de camara
+     */
     private fun checkCameraPermission() {
         if (ContextCompat.checkSelfPermission(
                 this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
@@ -237,8 +243,14 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    /***
+     * Esta função vai iniciar a camara a partir do GMSBarCodeScanner.
+     * Em caso de leitura com sucesso -> Faz fetch dos dados.
+     * EM caso de cancelar leitura não faz nada.
+     * EM caso de erro leitura não faz nada.
+     */
     private fun startCamera() {
-        // Initialize barcodeScanner within the method, no global variable needed
+
         val options = GmsBarcodeScannerOptions.Builder()
             .setBarcodeFormats(
                 Barcode.FORMAT_EAN_13,  // ISBN em formato EAN-13
@@ -248,7 +260,7 @@ class MainActivity : AppCompatActivity() {
 
         val barcodeScanner = GmsBarcodeScanning.getClient(this, options)
 
-        // Start barcode scanning
+        // Inicio do scan
         barcodeScanner.startScan()
             .addOnSuccessListener { barcode ->
                 // Task completed successfully
@@ -304,7 +316,7 @@ class MainActivity : AppCompatActivity() {
             error(R.drawable.ic_launcher_background)
         }
 
-        // Set text values using API data
+
         ratingTextView.text = bookInfo.averageRating?.let { String.format("%.1f", it) } ?: "N/A"
         pagesTextView.text = bookInfo.pageCount?.toString() ?: "N/A"
         dimensionsTextView.text = "A4"
@@ -313,7 +325,6 @@ class MainActivity : AppCompatActivity() {
             .setTitle(bookInfo.title)
             .setView(dialogView)
             .setPositiveButton(buttonTextAccept) { dialog, _ ->
-                // Handle adding the book to your collection
                 addBookToCollection(bookInfo)
                 binding.bottomNavigation.selectedItemId = R.id.item_1
             }

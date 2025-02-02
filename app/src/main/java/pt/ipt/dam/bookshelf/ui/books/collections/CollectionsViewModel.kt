@@ -8,10 +8,15 @@ import pt.ipt.dam.bookshelf.Services.RetrofitClient
 import pt.ipt.dam.bookshelf.Services.Service
 import pt.ipt.dam.bookshelf.models.CollectionsResponse
 import pt.ipt.dam.bookshelf.models.collection
+import pt.ipt.dam.bookshelf.utils.ToastUtils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/***
+ * Esta classe vai ser responsavél por tratar da logica de pedidos a API.
+ * Usa variavel LiveData para armazenar o resultado da resposta coleções em caso de sucesso ou falha.
+ */
 class CollectionsViewModel : ViewModel() {
     private val _collections = MutableLiveData<List<collection>>()
     val books: LiveData<List<collection>> get() = _collections

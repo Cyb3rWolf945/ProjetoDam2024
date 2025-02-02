@@ -3,6 +3,9 @@ package pt.ipt.dam.bookshelf.Services
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/***
+ * Singleton do retrofit para GoogleBooksAPI
+ */
 object GoogleBooksRetrofitClient {
 
     private const val BASE_URL = "https://www.googleapis.com/books/v1/"

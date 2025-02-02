@@ -1,6 +1,5 @@
 package pt.ipt.dam.bookshelf.ui.books.collections.collectionDetails
 
-import android.app.AlertDialog
 import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -8,14 +7,12 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import androidx.fragment.app.viewModels
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -23,6 +20,11 @@ import pt.ipt.dam.bookshelf.R
 import pt.ipt.dam.bookshelf.databinding.FragmentCollectionDetailsBinding
 import pt.ipt.dam.bookshelf.models.LivrosResponse
 
+/***
+ * Classe responsavél pelo Fragmento de detalhe de coleções.
+ * Exibe os livros de uma coleção.
+ * E inclui a funcionalidade de abanar o telemovel para mostrar um livro aleatório.
+ */
 class CollectionDetailsFragment : Fragment(), SensorEventListener {
 
     private val viewModel: CollectionDetailsViewModel by viewModels()
@@ -30,14 +32,14 @@ class CollectionDetailsFragment : Fragment(), SensorEventListener {
     private lateinit var savedLanguage: String
     private val binding get() = _binding!!
 
-    // var para o sensor do giroscopio
-    private var isSensorActive = false // controlo do sensor
+    // var para o sensor acelarometro.
+    private var isSensorActive = false // variavel de controlo
     private lateinit var sensorManager: SensorManager
     private var sensor: Sensor? = null
     private var lastUpdate: Long = 0
-    private var shakeCount = 0  // Add this property
-    private val REQUIRED_SHAKES = 3  // Add this property
-    private val shakeThreshold = 1000  // Increased threshold
+    private var shakeCount = 0  // Contador de vezes que o aparelho foi abanado.
+    private val REQUIRED_SHAKES = 3  // Número de shakes necessários para abrir o dialog.
+    private val shakeThreshold = 1000  // Limite de aceleração necessário para um shake
     private var lastX = 0f
     private var lastY = 0f
     private var lastZ = 0f
@@ -109,6 +111,9 @@ class CollectionDetailsFragment : Fragment(), SensorEventListener {
         binding.toggleSensorButton.isEnabled = true
     }
 
+    /***
+     * Função do acelarometro para quando os valores X,Y,Z mudam.
+     */
     override fun onSensorChanged(event: SensorEvent?) {
         if (event?.sensor?.type == Sensor.TYPE_ACCELEROMETER) {
             val currentTime = System.currentTimeMillis()
@@ -122,6 +127,7 @@ class CollectionDetailsFragment : Fragment(), SensorEventListener {
                 val deltaY = y - lastY
                 val deltaZ = z - lastZ
 
+                // calculo da acelaração linear
                 val speed = Math.abs(deltaX + deltaY + deltaZ) / ((currentTime - lastUpdate)) * 10000
 
                 if (speed > shakeThreshold) {
@@ -142,11 +148,16 @@ class CollectionDetailsFragment : Fragment(), SensorEventListener {
         }
     }
 
+    /***
+     * O sensor é ativado através do botão portanto, ao clicar no mesmo temos de dar reset nas variaveis
+     * X,Y,Z de forma a poder ser calculada novamente a acelaração.
+     * Bem como é dado o reset do número de shakes dado para que se tenha de realizar os 3 shakes outra vez.
+     */
     private fun startSensor() {
         binding.toggleSensorButton.isEnabled = false
         if (!isSensorActive && booksAdapter.getItemCount() > 0) {
             isSensorActive = true
-            shakeCount = 0  // Reset counter when starting
+            shakeCount = 0
             lastX = 0f
             lastY = 0f
             lastZ = 0f
@@ -162,6 +173,10 @@ class CollectionDetailsFragment : Fragment(), SensorEventListener {
         // Não necessário para este exemplo
     }
 
+
+    /***
+     * Dialog caso abanes 3 vezes o mobile. (bastante divertido)
+     */
     private fun showRandomBookDialog() {
         val randomBook = booksAdapter.getRandomBook()
         if (randomBook != null) {
