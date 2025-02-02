@@ -10,11 +10,15 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import pt.ipt.dam.bookshelf.MainActivity
 import pt.ipt.dam.bookshelf.databinding.SplashScreenLayoutBinding
 import pt.ipt.dam.bookshelf.ui.auth.authActivity
-import pt.ipt.dam.bookshelf.ui.auth.login.loginFragment
-import pt.ipt.dam.bookshelf.utils.User
-import pt.ipt.dam.bookshelf.utils.UserCacheUtil
 import java.util.Locale
 
+/***
+ * Classe de atividade do SplashScreen
+ * Esta classe responsabiliza-se por:
+ * Ser a tela de abertura da aplicação com um delay pevisto de 2 segundos.
+ * Ir confirmar se o utilizador esta auenticado, pelo facto do seu objeto estar no SharedPreferences ou não.
+ * E define o local por padrão caso o mesmo não exista.
+ */
 class SplashScreen : AppCompatActivity() {
 
     private lateinit var binding: SplashScreenLayoutBinding

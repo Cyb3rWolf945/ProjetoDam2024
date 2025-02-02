@@ -23,6 +23,11 @@ import pt.ipt.dam.bookshelf.utils.ToastUtils
 import java.util.Locale
 import java.util.regex.Pattern
 
+/***
+ * Classe responsavél pelo fragmento das definições da aplicação.
+ * Nesta classe não foi feito o uso do binding para simplificação.
+ * E apenas usa funções locais nos botões com exceção do eliminar conta e atualização de campos do utilizador.
+ */
 class Settings : Fragment() {
 
     companion object {
@@ -59,11 +64,11 @@ class Settings : Fragment() {
             langSelectorBuilder.setSingleChoiceItems(languages, -1) { dialog, selection ->
                 when (selection) {
                     0 -> {
-                        setLocale("pt")  // Set to Portuguese
+                        setLocale("pt")  // define a lingua para português
                         (activity as? MainActivity)?.setBottomNavigationItem(R.id.item_1)
                     }
                     1 -> {
-                        setLocale("en")  // Set to English
+                        setLocale("en")  // define a lingua para inglês
                         (activity as? MainActivity)?.setBottomNavigationItem(R.id.item_1)
                     }
                 }

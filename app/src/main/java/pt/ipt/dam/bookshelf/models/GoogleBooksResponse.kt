@@ -1,5 +1,6 @@
 package pt.ipt.dam.bookshelf.models
 
+// Data model para receber resposta do google books API -- JSON to KOTLIN Plugin
 data class GoogleBooksResponse(
     val items: List<BookItem>?
 )

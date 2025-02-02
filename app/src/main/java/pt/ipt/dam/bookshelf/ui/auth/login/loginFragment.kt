@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.commit
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -15,8 +14,10 @@ import pt.ipt.dam.bookshelf.R
 import pt.ipt.dam.bookshelf.databinding.FragmentLoginBinding
 import pt.ipt.dam.bookshelf.ui.auth.register.registerFragment
 import pt.ipt.dam.bookshelf.utils.ToastUtils
-import java.util.regex.Pattern
 
+/***
+ * Classe responsavel por tratar do fragmento Login e receber a resposta do viewModel, para alterações de UI.
+ */
 class loginFragment : Fragment() {
 
     // Usar View Binding
@@ -61,7 +62,6 @@ class loginFragment : Fragment() {
                 startActivity(intent)
                 activity?.finish()
             } else {
-
                 ToastUtils.showCustomToast(requireContext(), "Campos incorretos")
             }
         })

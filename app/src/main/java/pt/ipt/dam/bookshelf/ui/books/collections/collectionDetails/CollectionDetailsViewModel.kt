@@ -5,12 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import pt.ipt.dam.bookshelf.Services.RetrofitClient
 import pt.ipt.dam.bookshelf.Services.Service
-import pt.ipt.dam.bookshelf.models.Livros
 import pt.ipt.dam.bookshelf.models.LivrosResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/***
+ * Esta classe vai ser responsavél por tratar da logica de pedidos a API.
+ * Usa variavel LiveData para armazenar o resultado da resposta dos livros em caso de sucesso ou falha.
+ */
 class CollectionDetailsViewModel : ViewModel() {
 
     private val _books = MutableLiveData<List<LivrosResponse>>()
@@ -24,7 +27,6 @@ class CollectionDetailsViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     val livrosResponseList = response.body()?.get("mensagem") ?: emptyList()
 
-                    // Converter LivrosResponse para Livros
                     val livrosList = livrosResponseList.map { livro ->
                         LivrosResponse(
                             idlivros = livro.idlivros,

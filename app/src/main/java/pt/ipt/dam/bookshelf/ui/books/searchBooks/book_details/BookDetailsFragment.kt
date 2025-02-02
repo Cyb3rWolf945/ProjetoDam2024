@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import coil.load
+import pt.ipt.dam.bookshelf.BuildConfig
 import pt.ipt.dam.bookshelf.MainActivity
 import pt.ipt.dam.bookshelf.R
 import pt.ipt.dam.bookshelf.Services.RetrofitClient
@@ -56,7 +57,7 @@ class BookDetailsFragment : Fragment() {
         setupObservers()
 
         // Fetch book details
-        viewModel.fetchBookDetails(isbn, "AIzaSyBJaKQAJgsSeHOOdY0uZVhufLBDZN-Ps7I")
+        viewModel.fetchBookDetails(isbn, BuildConfig.BOOKS_API_KEY)
 
         return binding.root
     }

@@ -35,9 +35,7 @@ import pt.ipt.dam.bookshelf.models.Livros
 import pt.ipt.dam.bookshelf.models.VolumeInfo
 import pt.ipt.dam.bookshelf.searchBooks.search_books
 import pt.ipt.dam.bookshelf.ui.books.collections.Collections
-import pt.ipt.dam.bookshelf.ui.home_component.HomeFragment
 import pt.ipt.dam.bookshelf.ui.settings.Settings
-import pt.ipt.dam.bookshelf.ui.user_profile_component.user_profile
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,12 +43,18 @@ import pt.ipt.dam.bookshelf.ui.user_related.searchUsers
 import java.util.Locale
 import java.util.concurrent.ExecutorService
 
+/***
+ * Classe da atividade principal da aplicação.
+ * Está classe está responsavel por ser a classe da atividade mãe para todos os fragmentos.
+ * (sempre que um fragmento precisa de um context, vem buscar a esta classe).
+ */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var cameraExecutor: ExecutorService
     private var userId: Int = -1
     private var userName: String? = null
+    private lateinit var savedLanguage: String
 
     // ViewModel responsavel pelo dialog de adição do livro
     private lateinit var viewModel: BookInfoViewModel
@@ -59,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         enableEdgeToEdge()
-        val savedLanguage = UserPreferences.getLocale(this)
+        savedLanguage = UserPreferences.getLocale(this)
         if (savedLanguage.isNotEmpty()) {
             setLocale(savedLanguage)
         }
@@ -91,22 +95,20 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigation.menu.findItem(R.id.item_2)?.isVisible = false
 
-        // Initialize ViewModel
         viewModel = ViewModelProvider(this).get(BookInfoViewModel::class.java)
 
-        // Observe LiveData
+        /***
+         * Observable para a variavel bookInfoState.
+         */
         viewModel.bookInfoState.observe(this, Observer { state ->
             when (state) {
                 is BookInfoState.Loading -> {
-                    // Show loading dialog or progress
                     //showLoadingDialog()
                 }
                 is BookInfoState.Success -> {
-                    // Update the dialog with book information
                     showSuccessDialog(state.bookInfo)
                 }
                 is BookInfoState.Error -> {
-                    // Show error message
                     showErrorDialog(state.message)
                 }
             }
@@ -171,7 +173,7 @@ class MainActivity : AppCompatActivity() {
         val layoutInflater = getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view: View = layoutInflater.inflate(R.layout.custom_popup_menu, null)
 
-        // Defina o comportamento dos itens do menu aqui
+        // Defina o comportamento dos itens do menu aqui.
         val option1: TextView = view.findViewById(R.id.option1)
         val option2: TextView = view.findViewById(R.id.option2)
 
@@ -217,6 +219,9 @@ class MainActivity : AppCompatActivity() {
 
     //CAMARA FUNCTIONS
 
+    /***
+     * Permissões de camara
+     */
     private fun checkCameraPermission() {
         if (ContextCompat.checkSelfPermission(
                 this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
@@ -238,8 +243,14 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    /***
+     * Esta função vai iniciar a camara a partir do GMSBarCodeScanner.
+     * Em caso de leitura com sucesso -> Faz fetch dos dados.
+     * EM caso de cancelar leitura não faz nada.
+     * EM caso de erro leitura não faz nada.
+     */
     private fun startCamera() {
-        // Initialize barcodeScanner within the method, no global variable needed
+
         val options = GmsBarcodeScannerOptions.Builder()
             .setBarcodeFormats(
                 Barcode.FORMAT_EAN_13,  // ISBN em formato EAN-13
@@ -249,14 +260,14 @@ class MainActivity : AppCompatActivity() {
 
         val barcodeScanner = GmsBarcodeScanning.getClient(this, options)
 
-        // Start barcode scanning
+        // Inicio do scan
         barcodeScanner.startScan()
             .addOnSuccessListener { barcode ->
                 // Task completed successfully
                 val rawValue = barcode.rawValue // Retrieve the raw value of the barcode
                 // Do something with the rawValue (like displaying or processing)
                 if (rawValue != null) {
-                    viewModel.fetchBookInfo(rawValue, "AIzaSyBJaKQAJgsSeHOOdY0uZVhufLBDZN-Ps7I")
+                    viewModel.fetchBookInfo(rawValue, BuildConfig.BOOKS_API_KEY)
                 }
                 binding.bottomNavigation.selectedItemId = R.id.item_2 // para mudar de sitio
                 Toast.makeText(this, "Barcode detected: $rawValue", Toast.LENGTH_SHORT).show()
@@ -295,6 +306,9 @@ class MainActivity : AppCompatActivity() {
         val pagesTextView = dialogView.findViewById<TextView>(R.id.pagesTextView)
         val dimensionsTextView = dialogView.findViewById<TextView>(R.id.dimensionsTextView)
 
+        val buttonTextAccept = if (savedLanguage == "pt") "Adicionar" else "Add"
+        val buttonTextCancel = if (savedLanguage == "pt") "Cancelar" else "Cancel"
+
 
         val imageUrl = bookInfo.imageLinks?.thumbnail?.replace("http:", "https:")
         coverImageView.load(imageUrl) {
@@ -302,7 +316,7 @@ class MainActivity : AppCompatActivity() {
             error(R.drawable.ic_launcher_background)
         }
 
-        // Set text values using API data
+
         ratingTextView.text = bookInfo.averageRating?.let { String.format("%.1f", it) } ?: "N/A"
         pagesTextView.text = bookInfo.pageCount?.toString() ?: "N/A"
         dimensionsTextView.text = "A4"
@@ -310,12 +324,11 @@ class MainActivity : AppCompatActivity() {
         MaterialAlertDialogBuilder(this)
             .setTitle(bookInfo.title)
             .setView(dialogView)
-            .setPositiveButton("Adicionar") { dialog, _ ->
-                // Handle adding the book to your collection
+            .setPositiveButton(buttonTextAccept) { dialog, _ ->
                 addBookToCollection(bookInfo)
                 binding.bottomNavigation.selectedItemId = R.id.item_1
             }
-            .setNegativeButton("Cancelar") { dialog, _ ->
+            .setNegativeButton(buttonTextCancel) { dialog, _ ->
                 dialog.dismiss()
                 binding.bottomNavigation.selectedItemId = R.id.item_1
 

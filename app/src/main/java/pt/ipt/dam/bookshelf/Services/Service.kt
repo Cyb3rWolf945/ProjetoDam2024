@@ -13,7 +13,9 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-
+/***
+ * Interface para fetch dos endpoints criados por nós com uso de FASTAPI.
+ */
 interface Service {
     @POST("/login")
     fun login(@Body utilizador: Utilizadores): Call<LoginResponse>
@@ -33,8 +35,8 @@ interface Service {
 
     @GET("colecoes")
     fun getCollections(@Query("userid") userid: Int): Call<CollectionsResponse>
-    @GET("/users/")
 
+    @GET("/users/")
     fun getUsers(@Query ("email") email: String):Call<Utilizadores>
 
     @GET("/users/{user_id}/collections/{collection_id}/books")

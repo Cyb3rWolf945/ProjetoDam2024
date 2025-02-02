@@ -13,9 +13,12 @@ import pt.ipt.dam.bookshelf.databinding.ActivityAuthBinding // Import the bindin
 import pt.ipt.dam.bookshelf.ui.auth.login.loginFragment
 import java.util.Locale
 
+/***
+ * Classe responsavel pela atividade de autenticação, que é responsavel exatamente pelas páginas de login e registo.
+ */
 class authActivity : AppCompatActivity() {
 
-    // Declare the binding variable
+    // Usar View Binding
     private lateinit var binding: ActivityAuthBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,30 +32,36 @@ class authActivity : AppCompatActivity() {
         }
 
         val call = RetrofitClient.client
-        // Initialize the binding
-        binding = ActivityAuthBinding.inflate(layoutInflater)
-        setContentView(binding.root) // Use the root view from the binding
 
-        // Handling edge to edge insets
+
+        binding = ActivityAuthBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // Load the Login fragment by default if there's no saved instance
+        // Assegurar que o loginFragment apareça por defeito
         if (savedInstanceState == null) {
-            loadFragment(loginFragment()) // Ensure LoginFragment is your first fragment
+            loadFragment(loginFragment())
         }
     }
 
+    /***
+     * Esta função esta responsavél por tratar da transição do fragment.
+     */
     private fun loadFragment(fragment: Fragment) {
-        // Replace the fragment container with the specified fragment
         supportFragmentManager.beginTransaction()
             .replace(binding.fragmentContainer.id, fragment)
             .commit()
     }
 
+    /****
+     * Função responsavel por dar set do Locale a partir das sharedPreferences.
+     */
     private fun setLocale(localeToSet: String) {
         val localeListToSet = LocaleList(Locale(localeToSet))
         LocaleList.setDefault(localeListToSet)

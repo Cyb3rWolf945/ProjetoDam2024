@@ -7,7 +7,6 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import pt.ipt.dam.bookshelf.Services.RetrofitClient
 import pt.ipt.dam.bookshelf.Services.Service
 import pt.ipt.dam.bookshelf.models.Utilizadores
@@ -15,6 +14,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/***
+ * ViewModel responsabél pela eliminação de um utilizador bem como o update do mesmo.
+ */
 class SettingsViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _updateSuccess = MutableLiveData<Boolean>()
